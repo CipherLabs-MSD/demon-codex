@@ -30,4 +30,5 @@ There is no game build, engine dependency, backend, or deployment procedure yet.
 `game/`, `backend/`, `assets/`, and `blockchain/` contain scope notes only.
 `content/` contains a proposed data contract, not approved demon records.
 `tests/` describes the future evidence strategy. Begin implementation only in a
-separately authorized task after the M001 rule and stack decisions are reviewed.
+separately authorized task after the M001 rules are reviewed. Unity 6 is the accepted engine for M001 and
+the primary mobile client; see [ADR 0002](docs/adr/0002-unity-6-engine.md).

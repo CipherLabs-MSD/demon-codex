@@ -2,7 +2,9 @@
 
 PROPOSAL: [entity.schema.json](entity.schema.json) is JSON Schema draft 2020-12 for
 public authoring review. It is not the runtime model and contains no demon records.
-No engine or JSON Schema validator dependency is selected by this contract.
+Unity 6 is selected by [ADR 0002](../docs/adr/0002-unity-6-engine.md); this
+content contract remains engine-independent. No JSON Schema validator dependency
+is selected by this contract.
 
 Canonical definitions use codexId 001–666; anomalous definitions omit it and use an
 independent entityId. Normal rarity, special classification and editions are separate.

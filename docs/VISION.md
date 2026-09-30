@@ -20,5 +20,8 @@ WORKING DECISION: optimize clarity → modularity → testability → iteration 
 Foundation v0.1 creates documentation and controls only; v0.01 names the future
 first playable. These version labels describe different deliverables.
 
-UNKNOWN: audience, age positioning, final visual tone, engine, device baseline,
+ACCEPTED: Unity 6 for M001 and the primary mobile client; see
+[ADR 0002](adr/0002-unity-6-engine.md). iOS and Android are the primary platform direction.
+
+UNKNOWN: audience, age positioning, final visual tone, device baseline,
 launch territories and final rules. Do not invent answers to close documents.

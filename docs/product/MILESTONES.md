@@ -20,6 +20,7 @@ OUT: blockchain, NFTs, marketplace, physical redemption, real-money economy,
 production backend, live multiplayer, 666 generated demons, elaborate LiveOps,
 collection economy, Forge and monetization. Art may be clearly labeled placeholders.
 
-Entry gates: approve explicit rules and choose a lightweight engine/runtime using
-documented alternatives. Exit gate: reviewer confirms all acceptance evidence and
+Entry gates: approve explicit rules under DC-0002. The engine decision is satisfied:
+[ADR 0002](../adr/0002-unity-6-engine.md) accepts Unity 6 for local/offline M001
+and the primary mobile client (iOS/Android direction). Exit gate: reviewer confirms all acceptance evidence and
 product owner records whether to iterate or proceed. No dates or budget promised.

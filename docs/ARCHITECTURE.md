@@ -15,7 +15,12 @@ not a deployed service topology. See [ADR 0001](adr/0001-foundation-boundaries.m
 PROPOSAL: begin with a deterministic local rules core, explicit state transitions,
 injected randomness and a UI adapter. Record seed and actions for reproducible
 tests. Keep engine-specific types outside rules where practical. Do not add a
-distributed backend to solve a local prototype problem. Stack remains UNKNOWN.
+distributed backend to solve a local prototype problem.
+
+ACCEPTED: [ADR 0002](adr/0002-unity-6-engine.md) selects Unity 6 for M001 and the
+primary mobile client, with iOS/Android direction. M001 remains local/offline.
+Unity must not own authoritative future economy/inventory state. Exact editor and
+package versions remain setup unknowns; the engine choice requires a new ADR to revisit.
 
 ## Identity boundaries
 

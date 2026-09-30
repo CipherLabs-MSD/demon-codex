@@ -15,8 +15,10 @@ Backlog tasks organize work but do not authorize spending or publishing.
 ## Implementation discipline
 
 Prefer small, modular, testable changes. Keep rules separate from presentation and
-randomness controllable. Avoid speculative abstractions and dependencies. No engine
-is selected. No premature blockchain, multiplayer or production backend. Ordinary
+randomness controllable. Avoid speculative abstractions and dependencies. Unity 6
+is the accepted engine for M001 and the primary mobile client; follow
+[ADR 0002](docs/adr/0002-unity-6-engine.md). No premature blockchain, multiplayer
+or production backend. Ordinary
 game state stays off-chain. Keep canonical numbering separate from anomaly identity,
 rarity, edition and owned instances. Consult architecture and schema docs.
 

@@ -1,7 +1,8 @@
 # Foundation review — 2026-09-30
 
 WORKING DECISION: foundation is ready for owner review; DC-0001 remains REVIEW / TEST.
-This record does not approve the gameplay rules, stack or future implementation.
+This record does not approve gameplay rules or future implementation. The product
+owner has separately accepted Unity 6 in [ADR 0002](../adr/0002-unity-6-engine.md).
 
 ## Structural evidence
 
@@ -16,7 +17,7 @@ Full JSON Schema instance validation is not claimed by this lightweight checker.
 
 - All requested workstreams have stable IDs and concrete acceptance/evidence fields.
 - Canonical numbering, rarity, special identity and edition are separate.
-- Rules, engine, economy parameters and witness semantics remain explicit unknowns.
+- Unity 6 is accepted; detailed rules, economy parameters and witness semantics remain unknown.
 - Restricted identities, locations, complete powers and discovery conditions are omitted.
 - M001 is local board play; collection and all production systems are excluded.
 - Game, backend and blockchain directories contain README scope notes only.
@@ -28,5 +29,5 @@ Full JSON Schema instance validation is not claimed by this lightweight checker.
 
 No gameplay tests, playable build, performance baseline, economy balance, legal
 determination or secret-store security validation exists. Human review must approve
-foundation, rules and stack before implementation. CI execution is separate evidence
+foundation and detailed rules before implementation; engine selection is complete. CI execution is separate evidence
 from the local check and should be inspected on the PR.

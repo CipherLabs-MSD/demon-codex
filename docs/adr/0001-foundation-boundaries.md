@@ -21,7 +21,8 @@ to inspect. Full entity records would risk premature canon.
 
 ## Consequences
 No playable build exists. The schema is a reviewable authoring proposal, not a frozen
-runtime API. Engine and rules still require review. Added schema/tools/evidence files
+runtime API. At bootstrap, engine and rules required review. The engine question
+is now resolved by [ADR 0002](0002-unity-6-engine.md); rules still require review. Added schema/tools/evidence files
 are the only meaningful expansion of the requested layout; no system is deployed.
 
 ## Evidence
