@@ -44,7 +44,9 @@ review during setup; this decision supplies no budget or performance guarantees.
 
 UNKNOWN: exact Unity 6 editor release, package versions, rendering approach and
 device baseline. These are setup details, not an open engine-selection task.
-Detailed board rules remain UNKNOWN pending DC-0002. No project scaffold or game
+At engine acceptance, detailed board rules remained UNKNOWN. The subsequent
+[DC-0002 specification](../GDD.md) records supplied mechanics and remaining
+review gaps without changing this engine decision. No project scaffold or game
 implementation is authorized by this documentation update.
 
 ## Evidence

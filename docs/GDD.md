@@ -14,22 +14,224 @@ Demon Codex must develop its own board layout, progression, terminology, visuals
 abilities, economy, content, UX and meta systems. Do not copy proprietary layouts,
 assets, wording, progression systems or distinctive presentation from contemporary
 commercial games. This direction does not add abilities or meta systems to M001.
-Detailed board rules remain UNKNOWN pending DC-0002; no specific rules are implied
-by these references.
+No specific rules are implied by these references; use the explicit M001 rules below.
 
 ## M001 scope
 
-WORKING DECISION: first playable targets one board, four players (one human,
-three bots), four pieces per player and one die. Include turns, legal move
-validation, movement, knockout/send-home, safe/home handling, victory and restart.
+ACCEPTED FOR M001: the product owner supplied the mechanical rules in DC-0002.
+They apply to one local/offline match with four players, one human and three bots,
+four pieces per player and one six-sided die. They do not authorize implementation.
+The specification is submitted for human review; proposed gap resolutions below
+must not be silently treated as approved rules.
 
-## Rules awaiting human review
+WORKING DECISION: **Abyss**, **Summon**, **Banished** and **Ascension Path** are
+provisional terms, not immutable CANON. Internal state names below are also working
+vocabulary and carry no new lore. Abilities are outside this ruleset.
 
-UNKNOWN: board topology and track length; entry roll; die faces; extra turns;
-exact-roll home entry; safe-square occupancy; stacking/blockades; knockout bonus;
-overshoot behavior; turn order; bot choice policy; stalemate handling.
-TODO: specify these together with examples before coding. Familiar Ludo rules
-must not become defaults silently. Abilities are outside the first ruleset.
+## Abstract topology and configuration
+
+WORKING DECISION: describe the board as a directed cyclic main track plus four
+private final paths, not a visual layout. The configuration contains:
+
+| Field | Meaning and validation | Concrete M001 value |
+| --- | --- | --- |
+| mainTrackLength L | Integer count of main-track positions; at least four to support distinct starts | UNKNOWN |
+| startIndex[player] | Four distinct indices in 0..L-1, one per player | UNKNOWN |
+| safeSpaceIndices | Explicit subset of 0..L-1 containing every start index | Starts required; additional indices UNKNOWN |
+| finalPathLength[player] | Positive integer steps from the last main-track position to completion; call the moving owner's length F | UNKNOWN |
+| playerOrder | Permutation of all four player IDs, used cyclically under proposal G4 | Concrete seating/order UNKNOWN |
+| initialPlayer | One member of playerOrder, explicit match input | Selection policy UNKNOWN |
+
+Incrementing an index modulo L defines abstract forward movement; it does not pick
+a clockwise artwork orientation. Paths have owner-qualified coordinates. A square
+with the same local number in two private paths is not the same position. Safety
+is a property of the shared main-track index, not of the player occupying it.
+Validate configuration before constructing a match; reject missing/invalid values.
+No arbitrary board dimensions, final art or runtime defaults are supplied here.
+
+### Route convention requiring review (G3)
+
+PROPOSAL G3: summoning places a piece at its start with progress p=0. Track progress
+p ranges from 0 to L-1; its shared index is (startIndex[owner] + p) modulo L.
+After visiting each main-track position once, the next step enters private path
+position j=1. The start is not visited a second time. For a roll r, q=p+r:
+
+- q < L: remain OnMainTrack at progress q.
+- L <= q < L+F-1: enter OnAscensionPath at j=q-L+1.
+- q = L+F-1: become Completed.
+- q > L+F-1: illegal overshoot.
+
+OnAscensionPath uses j=1..F-1. A roll advances to j+r; equality with F completes
+the piece, exceeding F is illegal. F=1 has no occupiable private-path positions:
+the first step off the main track completes the piece. A roll can cross the track
+boundary and complete in one move if its distance is exact. There is no extra lap,
+branch choice, optional early entry or movement into an opponent's private path.
+The final destination is a completed state, not a square that finished pieces block.
+This convention makes off-by-one behavior reviewable without choosing L or F.
+
+## State vocabulary
+
+WORKING DECISION: a match snapshot contains validated immutable configuration,
+four player IDs/control types, 16 stable piece IDs and owners, the current phase,
+activePlayer, pendingRoll (absent or 1..6), optional winner and a revision identifier.
+All players stay in the order until victory; M001 has no elimination subsystem.
+Successful commands advance the revision; restart must use a fresh revision rather
+than reusing the original one. Invalid commands leave it unchanged. A roll passed
+to move generation in AwaitingSelection must match pendingRoll; other rolls are rejected.
+
+| Piece state | Position data | Meaning |
+| --- | --- | --- |
+| InAbyss | None | Off-board and eligible to summon only on 6 |
+| OnMainTrack | Owner-relative progress p | Shared square derived from configuration |
+| OnAscensionPath | Private path position j, owner from piece | Only this owner's path is reachable |
+| Completed | None | Finished, immobile, counted toward victory |
+
+InAbyss and Completed hold multiple pieces because they are states, not occupiable
+squares. No piece can have two states at once. Banishing resets it to InAbyss,
+discarding all route progress. Summoning consumes the entire rolled 6 and places
+the piece on its starting square; it does not also move six more spaces.
+
+WORKING DECISION: match phases are AwaitingRoll, AwaitingSelection and Finished.
+Resolution is atomic, not a separately interactive phase. Starting/restarting a
+match initializes all pieces InAbyss, no pending roll or winner, the configured
+initialPlayer and AwaitingRoll. Restart recreates this complete gameplay state
+using the same configuration and initial-player input; external RNG reset/seed
+selection is explicit caller policy, never hidden rules-core randomness.
+
+## Legal-move generation and resolution
+
+WORKING DECISION: the conceptual function is
+`state + active player + die roll → set of legal moves`.
+It accepts a valid, nonterminal state and an integer roll 1..6 for the active player.
+The function is pure: it does not roll, pick a piece, change state or consume time.
+
+For each of the active player's four pieces:
+
+1. InAbyss yields a Summon candidate only on 6, targeting that owner's start.
+2. OnMainTrack or OnAscensionPath yields an Advance candidate using the exact roll
+   and route convention above. Remove overshoots; Completed yields no candidate.
+3. Remove candidates ending on a friendly occupied main-track or private-path
+   position. Summons use the same destination occupancy checks as other moves.
+4. A non-safe main-track destination occupied by an opponent is a legal banishment
+   destination. An opponent-occupied safe destination follows G1 below; never banish
+   its occupant. Traversed occupancy follows G5 below; it is not a landing.
+5. Return every surviving candidate, identified by piece, action, source, target
+   and current roll/revision. On 6 both Summon and Advance candidates can coexist.
+
+The human chooses from the full set; bot selection must be a separate deterministic,
+testable policy that returns a member of that same set. Exact bot ranking is UNKNOWN
+and outside DC-0002. There is no voluntary pass when legal moves exist: choosing
+a piece resolves the roll. A singleton set may be auto-selected by the caller.
+
+WORKING DECISION: `state + selected legal move → new state + events` uses the stored
+pendingRoll and recomputes legality. Reject wrong phase/player, stale revision,
+invalid roll or altered/illegal move without mutating state or emitting gameplay
+success events. Duplicate submissions must not apply a move twice. Transport error
+reporting is separate from domain events.
+
+For a valid move, atomically remove the moving piece from its source, banish any
+eligible destination opponent, place/complete the mover, and check victory. Emit
+PieceBanished if applicable, then PieceSummoned / PieceMoved / PieceCompleted as
+applicable, followed by the match/turn outcome. A completing advance emits PieceMoved
+then PieceCompleted. Events record IDs and before/after positions; display wording
+is not canon. Consumers must never observe a half-resolved occupancy conflict.
+
+## Turn-state transitions
+
+WORKING DECISION: RollProvided is a command carrying an externally generated 1..6.
+No rules function samples randomness. Replaying the same initial configuration,
+rolls and valid choices produces identical state and ordered events. Seeded RNG and
+simulation limits live in the caller/test harness.
+
+| Current phase / input | Validation and transition | Result |
+| --- | --- | --- |
+| AwaitingRoll + RollProvided | Validate active player and roll; emit DieRolled; generate legal set | Nonempty set stores roll and enters AwaitingSelection |
+| AwaitingRoll + roll with empty legal set | Emit NoLegalMoves; move no piece; resolve bonus/advance using G2 | AwaitingRoll for same or next player; clear pending roll |
+| AwaitingSelection + selected legal move | Atomically resolve and check all four owned pieces | On victory emit MatchWon and enter Finished, clear pending roll |
+| AwaitingSelection + nonwinning legal move, roll 6 | Emit BonusRollGranted; retain active player | AwaitingRoll, clear pending roll |
+| AwaitingSelection + nonwinning legal move, roll 1..5 | Emit TurnAdvanced according to G4 | Next player's AwaitingRoll, clear pending roll |
+| Any phase + invalid normal action | Reject; no gameplay mutation or success events | Identical snapshot |
+| Finished + roll/move command | Reject; no normal transitions after victory | Finished remains unchanged |
+| Any phase + Restart | Recreate valid initial gameplay state; invalidate old move tokens | AwaitingRoll and MatchRestarted |
+
+Victory takes precedence over every bonus, including a winning 6. One accepted roll
+resolves at most one piece move. The next roll cannot arrive while awaiting a choice.
+No legal move is an automatic roll resolution, not a user-selected pass. Repeated
+sixes follow G6; knockout/completion bonuses follow G6 as well.
+
+## Rule and edge-case table
+
+ACCEPTED denotes supplied human mechanics; G references identify gap proposals
+that still require explicit approval. Rule IDs are stable references for tests.
+
+| Rule | Situation / example | Required outcome | Authority |
+| --- | --- | --- | --- |
+| R01 | Start/restart | Four players, 16 pieces, all InAbyss; one human and three bots | ACCEPTED |
+| R02 | Abyss piece, roll 1..5 / 6 | No summon / candidate to own start only; occupied destination checks still apply | ACCEPTED; state interpretation |
+| R03 | On-track/path piece, roll r | Move exactly r along own route; no split movement or optional shorter move | ACCEPTED |
+| R04 | Several legal pieces, including summon and advance on 6 | Choose exactly one legal piece; bots obey identical legality | ACCEPTED |
+| R05 | No legal piece, roll 1..5 | No movement; advance player | ACCEPTED |
+| R06 | Legal move on 6 | Resolve move first, then grant another roll to same player unless victory | ACCEPTED |
+| R07 | No legal move on 6 | No movement; bonus behavior requires G2 ruling | UNKNOWN G2 |
+| R08 | Land exactly on opponent on non-safe track square | Banish opponent to InAbyss, reset its progress, occupy destination | ACCEPTED |
+| R09 | Land on empty safe square | Legal; all starting squares are safe for every occupant | ACCEPTED |
+| R10 | Land/summon on opponent-occupied safe square | Never banish; reject destination under proposed G1 | UNKNOWN G1 |
+| R11 | Land/summon on friendly occupied square | Illegal, including own start and private path | ACCEPTED |
+| R12 | Pass over occupied positions with free/legal destination | Allowed under proposed G5; no intermediate capture | PROPOSAL G5 |
+| R13 | Last track position to private path | Use G3 route boundary; carry remaining steps into owner-only path | ACCEPTED owner restriction; PROPOSAL G3 indexing |
+| R14 | Remaining distance d; roll greater than d | Illegal for that piece; another legal piece may still move | ACCEPTED |
+| R15 | Roll exactly remaining distance | Piece becomes Completed and cannot move again; completion occupancy uses G3 | ACCEPTED; PROPOSAL G3 terminal convention |
+| R16 | Fourth owned piece completes | Immediate victory; freeze normal play, including any earned six bonus | ACCEPTED |
+| R17 | Capture or completion without full victory | No extra roll unless roll was 6 under proposed G6 | PROPOSAL G6 |
+| R18 | Consecutive sixes | No cap or three-sixes penalty under proposed G6 | PROPOSAL G6 |
+| R19 | Last seat resolves nonbonus roll | Wrap to first configured seat under G4; initial seat stays explicit | PROPOSAL G4 |
+| R20 | Restart during choice, bonus sequence or after victory | Clear positions/progress, pending roll and winner; restore initial active player; reject old selections | ACCEPTED restart; WORKING DECISION state contract |
+| R21 | Out-of-turn, duplicate, stale or malformed action | Reject atomically; no state mutation | WORKING DECISION validation contract |
+
+## Invariants for DC-0004
+
+WORKING DECISION: check these after every accepted transition and failed action:
+
+- I01: exactly four players and 16 unique pieces exist, four immutable owners/pieces per player.
+- I02: every piece has exactly one state with valid position data; configuration remains unchanged.
+- I03: Completed pieces never move; only restart can return them to InAbyss.
+- I04: private-path positions are owner-qualified; no opponent can enter another player's path.
+- I05: friendly pieces never share an occupiable position; G1 determines cross-player safe occupancy.
+- I06: safe-space occupants are never banished; banishment removes all prior progress.
+- I07: legal movement consumes the exact roll, except summon consumes 6 to enter at p=0.
+- I08: winner exists exactly when Finished, with all four winning pieces Completed; victory halts normal transitions.
+- I09: AwaitingSelection has one valid pending roll and a nonempty legal set; other phases have no pending roll.
+- I10: invalid actions preserve the complete snapshot and emit no gameplay success events.
+- I11: bonuses never switch players; nonbonus advancement follows the approved order; one roll moves at most one piece.
+- I12: identical inputs yield identical new state and ordered events; restart restores initial gameplay values and invalidates old moves.
+
+## Review gates and explicit UNKNOWNs
+
+The supplied mechanics contain no proven contradiction. They do not decide the
+following gaps. These proposals form a reviewable profile, not new approved rules:
+
+| Gap | Proposed resolution for review | Effect if left unanswered |
+| --- | --- | --- |
+| G1 | Block entry to opponent-occupied safe squares; one piece per occupiable square | Legal destination occupancy cannot be finalized |
+| G2 | A six grants another roll even when no move exists | Empty-legal-set transition on six cannot be finalized |
+| G3 | One visit per track square, then private path; final step completes into nonblocking state | Route indexing and completion boundary require approval |
+| G4 | Fixed configured cyclic player order; explicit initialPlayer | Nonbonus next-player transition requires approval |
+| G5 | Occupancy affects destinations only; pass over pieces without blockade/capture | Path traversal legality requires approval |
+| G6 | Six is the only bonus source; no consecutive-sixes penalty/cap | Capture/completion and repeated-six behavior require approval |
+
+UNKNOWN configuration: concrete L, four starts, any additional safe indices, F and
+first-player/seating policy. Choose them explicitly before a playable board; tests
+may use clearly labeled synthetic configurations, never promote fixture numbers to
+product decisions. UNKNOWN outside DC-0002: bot strategy, external restart seed
+policy, final artwork and terminology. Stalemate/draw rules are UNKNOWN; do not
+invent a draw, timeout win or forced move. Simulation watchdog expiration is a
+reported noncompletion, not a gameplay outcome. No finite completion guarantee is
+claimed for arbitrary dice/choices. Assess liveness in later simulation work.
+
+DC-0004 must not fill mechanical gaps itself. Human review must accept/revise G1–G6
+before implementation; numeric board configuration can remain separately pending.
+See the [rule-to-test matrix](../tests/M001_RULE_TEST_MATRIX.md) and
+[DC-0002 review record](product/DC_0002_REVIEW.md).
 
 PROPOSAL: a later collection slice could add four identities, twelve cards,
 three initial rarities, a Codex screen, one currency, one chest and one Forge recipe.
