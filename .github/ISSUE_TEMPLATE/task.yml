@@ -1,0 +1,22 @@
+name: Project task
+description: Evidence-based work linked to an epic and milestone
+title: "[DC-XXXX] "
+body:
+  - type: textarea
+    id: metadata
+    attributes:
+      label: Task metadata
+      description: Stable ID, epic, objective/KR, milestone, owner/agent, priority, dependencies, status
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and scope
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and review
+      description: Commands, results, links, reviewer and approval gates; omit restricted data
