@@ -5,7 +5,7 @@ WORKING DECISION: docs, instructions, initial backlog, schema proposal, ADR proc
 CI and reviewable commits. Evidence: [foundation review](FOUNDATION_REVIEW.md).
 
 ## M001 — First Playable (v0.01)
-WORKING DECISION: supports O001 / KR1–KR5. Status: not started.
+WORKING DECISION: supports O001 / KR1–KR5. Status: in progress — DC-0004 rules core is in review; DC-0005 playable UI is unstarted.
 
 Acceptance: START → ROLL → SELECT → MOVE → KNOCK OUT → REACH HOME → WIN → RESTART.
 One human can complete a match against three bots with four pieces per player,

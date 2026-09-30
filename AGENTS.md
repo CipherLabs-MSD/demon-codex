@@ -1,7 +1,8 @@
 # Agent operating instructions
 
 Build Demon Codex incrementally: a play-to-collect universe with 666 canonical
-demons. Foundation contains no game. Read README, the task, relevant domain docs,
+demons. A deterministic rules core now exists; the playable client is not built.
+Read README, the task, relevant domain docs,
 M001 and accepted ADRs before changing files.
 
 ## Authority and decisions
