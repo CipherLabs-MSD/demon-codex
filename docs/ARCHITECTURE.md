@@ -12,8 +12,9 @@ not a deployed service topology. See [ADR 0001](adr/0001-foundation-boundaries.m
 | blockchain | Optional exceptional provenance adapter | Deferred; no code |
 | tools/tests | Foundation checks and future evidence | Documentation checks only |
 
-PROPOSAL: begin with a deterministic local rules core, explicit state transitions,
-injected randomness and a UI adapter. Record seed and actions for reproducible
+WORKING DECISION: the [DC-0002 rules specification](GDD.md) defines a deterministic
+local rules core, explicit state transitions and externally supplied die results.
+Randomness and UI adapters stay outside the core. Record seed and actions for reproducible
 tests. Keep engine-specific types outside rules where practical. Do not add a
 distributed backend to solve a local prototype problem.
 

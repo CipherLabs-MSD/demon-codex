@@ -13,14 +13,17 @@ States: BACKLOG, READY, IN PROGRESS, REVIEW / TEST, BLOCKED, DONE.
 READY requires clear acceptance and satisfied dependencies; DONE requires linked
 actual evidence and review. The Evidence column specifies expected artifacts for open tasks and actual
 evidence for completed tasks. A blocked task records reason, owner and unblock action in its issue.
-DC-0002 remains BACKLOG pending DC-0001 review. The product owner explicitly
+Foundation v0.1 is human-approved; DC-0001 is DONE. The owner approved the
+DC-0002 specification and G1–G6 rulings; DC-0002 is DONE. Remaining board parameters
+and separate design policies do not block this approval. DC-0004 remains unstarted.
+The product owner explicitly
 resolved DC-0003 independently through ADR 0002; its prior foundation-review
 dependency is waived for that decision only. Other foundation outputs do not imply approval.
 
 | ID | Epic | Task | Owner/agent | Priority | Dependencies | Acceptance criteria | Evidence required | Status | Milestone |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| DC-0001 | Foundation | Review foundation controls | Product owner | P0 | None | README navigation, boundaries and validation reviewed | Foundation review and check output | REVIEW / TEST | F001 |
-| DC-0002 | Core Game | Specify board and turn rules | Core Game lead (unassigned) | P0 | DC-0001 | Resolve every GDD rule unknown with examples and owner approval | Reviewed rules and edge-case table | BACKLOG | M001 |
+| DC-0001 | Foundation | Review foundation controls | Product owner | P0 | None | README navigation, boundaries and validation reviewed | [Foundation review](FOUNDATION_REVIEW.md); explicit owner approval in DC-0002 request | DONE | F001 |
+| DC-0002 | Core Game | Specify board and turn rules | Product owner (review); rules agent (specification) | P0 | DC-0001 | Specify supplied mechanics, resolve G1–G6, and record explicit topology unknowns with owner approval | [Rules and edge cases](../GDD.md), [test matrix](../../tests/M001_RULE_TEST_MATRIX.md), [review record](DC_0002_REVIEW.md); explicit human approval of PR #2 / G1–G6 | DONE | M001 |
 | DC-0003 | Core Game | Accept Unity 6 engine decision | Product owner | P0 | None (human decision; see note above) | Record accepted Unity 6 decision, mobile direction and local M001 boundaries | [Accepted ADR 0002](../adr/0002-unity-6-engine.md); explicit human approval | DONE | M001 |
 | DC-0004 | Core Game | Implement deterministic rules core | Core Game lead (unassigned) | P0 | DC-0002, DC-0003 | Legal moves, turns, knockout, home and win follow approved rules | Rule tests and reproducible transition traces | BACKLOG | M001 |
 | DC-0005 | Core Game | Build local match UI and bots | Core Game lead (unassigned) | P0 | DC-0004 | One human and three bots can start, finish and restart a match | Manual complete-match record | BACKLOG | M001 |

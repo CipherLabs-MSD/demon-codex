@@ -6,7 +6,7 @@ Foundation v0.1 establishes the project control center. No game is implemented y
 ## Start here
 
 - [Vision and decision labels](docs/VISION.md)
-- [Game design and unresolved rules](docs/GDD.md)
+- [Game design and M001 rules specification](docs/GDD.md)
 - [Architecture](docs/ARCHITECTURE.md) and [decision records](docs/adr/README.md)
 - [M001 scope](docs/product/MILESTONES.md), [OKRs](docs/product/OKRS.md), and [master backlog](docs/product/MASTER_BACKLOG.md)
 - [Agent instructions](AGENTS.md) and [contribution workflow](CONTRIBUTING.md)

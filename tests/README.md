@@ -8,3 +8,6 @@ M001: test approved legal/illegal transitions, safe/home boundaries, knockout,
 turn sequencing, win and restart. Use deterministic seeds and state invariants;
 record simulation timeouts and failure seeds. Pair automated evidence with an
 actual human match and fresh-checkout setup. No gameplay tests exist yet.
+
+The [M001 rule-to-test matrix](M001_RULE_TEST_MATRIX.md) maps the DC-0002
+specification to future DC-0004 cases and invariants. All gameplay cases remain NOT RUN.
