@@ -1,0 +1,18 @@
+# Credentials and local state (ignore rules are not access control)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+build/
+coverage/
+*.log
+.idea/
+.vscode/
