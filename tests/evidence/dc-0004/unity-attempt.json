@@ -1,0 +1,14 @@
+{
+  "editor": "6000.6.3f1",
+  "revision": "45d8eee7de74",
+  "mode": "batchmode, nographics, EditMode",
+  "exitCode": 198,
+  "status": "BLOCKED_NO_LICENSE",
+  "testsExecuted": 0,
+  "projectImportVerified": false,
+  "diagnostics": [
+    "Access token is unavailable; failed to update",
+    "Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids"
+  ],
+  "note": "Sanitized excerpt; full local editor log in ignored artifacts/unity/editor.log. No license or account identifiers committed."
+}

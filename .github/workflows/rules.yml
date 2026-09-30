@@ -1,0 +1,26 @@
+name: Rules core
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  domain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.425'
+      - name: Domain, replay, invariants and simulation integration tests
+        run: dotnet test tests/DemonCodex.Rules.Tests/DemonCodex.Rules.Tests.csproj -c Release --logger "trx;LogFileName=rules.trx" --results-directory artifacts/dotnet-tests
+      - name: 1000 matches with transition invariants
+        run: dotnet run --project tools/DemonCodex.Simulation.Cli -c Release -- 1000 1 artifacts/simulation 10000
+      - name: Compare deterministic simulation with committed baseline
+        run: diff tests/evidence/dc-0004/matches.csv artifacts/simulation/matches.csv
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rules-evidence
+          path: artifacts/

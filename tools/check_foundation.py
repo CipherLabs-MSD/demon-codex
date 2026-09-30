@@ -1,5 +1,6 @@
 """Dependency-free structural checks; run from any working directory."""
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -29,7 +30,12 @@ required = [
 for name in required:
     check((ROOT / name).is_file(), f'Missing required file: {name}')
 
-markdown = list(ROOT.rglob('*.md'))
+generated = {'.git', 'Library', 'Temp', 'Logs', 'UserSettings', 'bin', 'obj',
+             'artifacts', 'node_modules', '.venv', '__pycache__'}
+markdown = []
+for directory, children, files in os.walk(ROOT):
+    children[:] = [name for name in children if name not in generated]
+    markdown.extend(Path(directory) / name for name in files if name.endswith('.md'))
 for path in markdown:
     if '.git' in path.parts:
         continue

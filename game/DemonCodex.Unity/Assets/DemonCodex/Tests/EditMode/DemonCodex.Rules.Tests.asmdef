@@ -1,0 +1,8 @@
+{
+  "name": "DemonCodex.Rules.Tests",
+  "rootNamespace": "DemonCodex.Rules.Tests",
+  "references": ["DemonCodex.Rules", "DemonCodex.Simulation"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}
