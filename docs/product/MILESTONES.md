@@ -20,8 +20,8 @@ OUT: blockchain, NFTs, marketplace, physical redemption, real-money economy,
 production backend, live multiplayer, 666 generated demons, elaborate LiveOps,
 collection economy, Forge and monetization. Art may be clearly labeled placeholders.
 
-Entry gates: approve the [DC-0002 rules specification](../GDD.md), including its
-remaining mechanical review gaps. Board values must be explicit validated
+Rules approval gate satisfied: the human owner accepted the [DC-0002 rules
+specification](../GDD.md), including G1–G6. Board values must be explicit validated
 configuration before a playable match; no final dimensions are selected here. The engine decision is satisfied:
 [ADR 0002](../adr/0002-unity-6-engine.md) accepts Unity 6 for local/offline M001
 and the primary mobile client (iOS/Android direction). Exit gate: reviewer confirms all acceptance evidence and

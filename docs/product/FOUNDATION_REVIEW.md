@@ -19,7 +19,7 @@ Full JSON Schema instance validation is not claimed by this lightweight checker.
 - All requested workstreams have stable IDs and concrete acceptance/evidence fields.
 - Canonical numbering, rarity, special identity and edition are separate.
 - Unity 6 is accepted. At foundation review, detailed rules were unknown; the
-  [DC-0002 specification](../GDD.md) now records supplied rules and remaining gaps.
+  [DC-0002 specification](../GDD.md) now records approved rules and separately pending configuration/design choices.
   Economy parameters and witness semantics remain unknown.
 - Restricted identities, locations, complete powers and discovery conditions are omitted.
 - M001 is local board play; collection and all production systems are excluded.
@@ -32,6 +32,6 @@ Full JSON Schema instance validation is not claimed by this lightweight checker.
 
 No gameplay tests, playable build, performance baseline, economy balance, legal
 determination or secret-store security validation exists. Foundation and engine selection are approved.
-Human review of the [DC-0002 specification](DC_0002_REVIEW.md) remains required
-before rules implementation. CI execution is separate evidence
+The [DC-0002 specification](DC_0002_REVIEW.md) is now human-approved, including
+G1–G6. DC-0004 remains unstarted and requires separate task authorization. CI execution is separate evidence
 from the local check and should be inspected on the PR.
