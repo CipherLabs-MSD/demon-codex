@@ -28,5 +28,8 @@ reproduce. No mobile or IL2CPP build pass is claimed.
 Foundation checks cover documentation links and required files, task references,
 schema boundaries and milestone exclusions. Generated Unity/.NET directories are
 excluded from documentation traversal. They do not replace narrative review.
-M001 still needs a playable UI and human playtest. DC-0004 is human-approved DONE;
-DC-0005 remains BACKLOG.
+DC-0005 adds a playable scene, nine shared session tests, five Editor-only
+development-scenario replay tests and three Unity PlayMode tests. Run `dotnet test tests/DemonCodex.LocalMatch.Tests/DemonCodex.LocalMatch.Tests.csproj -c Release`.
+Add `-TestPlatform PlayMode` to the Unity helper for scene/controller validation.
+See [DC-0005 execution evidence and owner acceptance](../docs/product/DC_0005_EVIDENCE.md).
+DC-0004 and DC-0005 are DONE.

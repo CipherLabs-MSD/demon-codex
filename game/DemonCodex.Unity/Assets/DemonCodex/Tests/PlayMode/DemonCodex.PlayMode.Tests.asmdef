@@ -1,0 +1,6 @@
+{
+  "name": "DemonCodex.PlayMode.Tests",
+  "references": ["DemonCodex.Rules", "DemonCodex.LocalMatch", "DemonCodex.Presentation", "DemonCodex.Development"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

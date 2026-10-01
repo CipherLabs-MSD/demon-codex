@@ -5,12 +5,12 @@ not a deployed service topology. See [ADR 0001](adr/0001-foundation-boundaries.m
 
 | Area | Responsibility | Current state |
 | --- | --- | --- |
-| game | Immutable match/configuration, legal moves, command reducer, ordered events and invariants | Plain C# core; no presentation |
+| game | Immutable match/configuration, legal moves, command reducer, ordered events and invariants | Plain C# core plus session adapter and Unity local-match view |
 | content | Versioned authoring contracts and approved public content | Proposed schema |
 | backend | Future accounts, inventory authority and online systems | Deferred |
 | assets | Reviewed art/audio with rights metadata | Empty of media |
 | blockchain | Optional exceptional provenance adapter | Deferred; no code |
-| tools/tests | NUnit, deterministic simulation and foundation/link checks | 48 .NET and 48 Unity EditMode tests passed; 1000 simulated matches completed |
+| tools/tests | NUnit, deterministic simulation and foundation/link checks | [DC-0005 validation](product/DC_0005_EVIDENCE.md); shared .NET/Unity tests and 1000-match baseline |
 
 WORKING DECISION: the [DC-0002 rules specification](GDD.md) defines a deterministic
 local rules core, explicit state transitions and externally supplied die results.
@@ -27,7 +27,10 @@ Framework 1.8.0. The engine choice requires a new ADR to revisit.
 DC-0004 keeps runtime rules in an assembly with no Unity references; .NET Standard
 2.1 builds link the same C# files. Commands carry revisions; immutable snapshots
 and read-only configuration make rejection nonmutating. RNG and deterministic
-test policy live only in an editor/test simulation assembly. The [evidence record](product/DC_0004_EVIDENCE.md)
+test policy for the DC-0004 harness live in an editor/test simulation assembly.
+DC-0005 adds a separate runtime session RNG and deterministic bot policy; the
+Unity controller schedules commands, consumes ordered events and renders snapshots.
+The prototype scene contains no independent rules implementation. The [evidence record](product/DC_0004_EVIDENCE.md)
 details invariants, API boundaries and test results. No network/save protocol is implied.
 
 ## Identity boundaries

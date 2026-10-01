@@ -1,5 +1,7 @@
 param(
-    [Parameter(Mandatory = $true)][string]$UnityEditor
+    [Parameter(Mandatory = $true)][string]$UnityEditor,
+    [ValidateSet('EditMode', 'PlayMode')][string]$TestPlatform = 'EditMode',
+    [switch]$CaptureScreenshots
 )
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
@@ -9,9 +11,17 @@ $runDirectory = Join-Path $repositoryRoot ('artifacts/unity/' + [guid]::NewGuid(
 New-Item -ItemType Directory -Path $runDirectory -Force | Out-Null
 $resultPath = Join-Path $runDirectory 'results.xml'
 $logPath = Join-Path $runDirectory 'editor.log'
-$arguments = @('-batchmode', '-nographics', '-projectPath', ('"' + $projectDirectory + '"'),
-    '-runTests', '-testPlatform', 'EditMode', '-testResults', ('"' + $resultPath + '"'),
+$arguments = @('-batchmode', '-projectPath', ('"' + $projectDirectory + '"'),
+    '-runTests', '-testPlatform', $TestPlatform, '-testResults', ('"' + $resultPath + '"'),
     '-logFile', ('"' + $logPath + '"'))
+if ($CaptureScreenshots) {
+    # Editor batch mode does not repaint the Game view for ScreenCapture.
+    $arguments = @($arguments | Where-Object { $_ -ne '-batchmode' })
+    $env:DEMON_CODEX_CAPTURE_DIR = Join-Path $runDirectory 'screenshots'
+} else {
+    $arguments += '-nographics'
+    $env:DEMON_CODEX_CAPTURE_DIR = $null
+}
 $process = Start-Process -FilePath $UnityEditor -ArgumentList $arguments -WindowStyle Hidden -PassThru
 Write-Output "Unity PID $($process.Id); log: $logPath"
 $process.WaitForExit()

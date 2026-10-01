@@ -227,11 +227,13 @@ review. These are unconditional M001 expectations, not proposals or UNKNOWNs.
 
 ## Explicit UNKNOWNs outside DC-0002 approval
 
-UNKNOWN configuration: concrete L, four starts, any additional safe indices, F and
-first-player/seating policy. Choose them explicitly before a playable board; tests
-may use clearly labeled synthetic configurations, never promote fixture numbers to
-product decisions. UNKNOWN outside DC-0002: bot strategy, external restart seed
-policy, final artwork and terminology. Stalemate/draw rules are UNKNOWN; do not
+UNKNOWN permanent configuration: concrete L, starts, extra safe indices, F and
+production first-player/seating policy. DC-0005 explicitly selects a revisable
+[M001 PROTOTYPE CONFIGURATION](product/DC_0005_EVIDENCE.md): L=40, starts
+0/10/20/30, safe indices 0/5/10/15/20/25/30/35, F=6 each, cyclic P0/P1/P2/P3,
+P0 starts. Simple deterministic bot ranking and same-seed restart are documented
+there. These are not permanent canon; final bot strategy, artwork and terminology
+remain UNKNOWN. Stalemate/draw rules are UNKNOWN; do not
 invent a draw, timeout win or forced move. Simulation watchdog expiration is a
 reported noncompletion, not a gameplay outcome. No finite completion guarantee is
 claimed for arbitrary dice/choices. Assess liveness in later simulation work.
@@ -241,7 +243,8 @@ remaining configuration/design choices do not block its approval. They require
 separate explicit decisions and must not become implicit defaults. DC-0004 remains
 a separate task; rules approval alone did not authorize gameplay implementation.
 The subsequent human request authorized DC-0004, whose [implementation evidence](product/DC_0004_EVIDENCE.md)
-now records successful Unity validation and human approval of DONE. DC-0005 remains unstarted.
+now records successful Unity validation and human approval of DONE. The subsequent DC-0005 request authorized a local playable prototype; its
+[evidence](product/DC_0005_EVIDENCE.md) records owner acceptance and DONE.
 See the [rule-to-test matrix](../tests/M001_RULE_TEST_MATRIX.md) and
 [DC-0002 review record](product/DC_0002_REVIEW.md).
 

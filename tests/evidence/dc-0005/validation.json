@@ -1,0 +1,469 @@
+{
+  "date": "2026-10-01",
+  "editor": "6000.6.3f1",
+  "base": "91229d89c9295387d7248b3f70773ec9714ce52f",
+  "humanAcceptance": "PASS",
+  "runs": {
+    "unityEditMode": {
+      "result": "Passed",
+      "passed": 62,
+      "failed": 0,
+      "skipped": 0,
+      "source": "artifacts/unity/f1a13f5677534ac7b6ed32171272307c/results.xml",
+      "sha256": "5fbb2202b9d351b78ab71a5faeed4775ce7dc967d3a894353df1ab09aab11f16",
+      "cases": [
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.PreparingScenariosDoesNotChangeNormalStartOrSeededPlay",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Ascension)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Completion)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Knockout)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Victory)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.CompleteMatchesAreLegalReproducibleAndRestartable(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.CompleteMatchesAreLegalReproducibleAndRestartable(2026)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.CompleteMatchesAreLegalReproducibleAndRestartable(42)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.HumanRollUsesDomainAndSelectablesAreExactLegalCandidates",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.NoMoveTurnsYieldWithoutConsumingExtraDiceOrHumanInput",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.PolicyPrioritizesRealCaptureOverSummon",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.PolicyUsesCompletionThenCaptureThenSummonThenProgressThenIndex",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.PrototypeConfigurationIsExplicitAndValid",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.SessionTests.SixGrantsBonusAndStaleSelectionIsRejected",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.InvariantDiagnosticsDetectCorruption",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.LargeRouteArithmeticAndRevisionDoNotOverflow",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T01_Initialization",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T02_SummonOnlyOnSix(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T02_SummonOnlyOnSix(2)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T02_SummonOnlyOnSix(3)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T02_SummonOnlyOnSix(4)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T02_SummonOnlyOnSix(5)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T02_SummonOnlyOnSix(6)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T03_FriendlyStartBlocksSummonButAllowsAdvance",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T04_ExactMovementAndSharedIndexWrap(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T04_ExactMovementAndSharedIndexWrap(2)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T04_ExactMovementAndSharedIndexWrap(3)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T04_ExactMovementAndSharedIndexWrap(4)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T04_ExactMovementAndSharedIndexWrap(5)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T04_ExactMovementAndSharedIndexWrap(6)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T05_CompleteMoveSetIncludesSummonAndAdvance",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T06_TestPolicyIsDeterministicAndLegal",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T07_NoLegalMoveAdvancesTurn(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T07_NoLegalMoveAdvancesTurn(2)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T07_NoLegalMoveAdvancesTurn(3)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T07_NoLegalMoveAdvancesTurn(4)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T07_NoLegalMoveAdvancesTurn(5)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T08_SixBonusAfterMove",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T09_NoMoveSixStillGrantsBonus",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T10_KnockoutIsAtomicAndResetsVictim",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T11_AllSafeDestinationsBlockOpponentsButAllowEmptyEntry",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T12_FriendlyTrackAndPathOccupancyRejectDestinations",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T13_IntermediateOccupancyNeverBlocksOrCaptures",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T14_TrackToPrivatePathAndMinimalPath(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T14_TrackToPrivatePathAndMinimalPath(4)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T15_OvershootExcludedButOtherPiecesCanMove(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T15_OvershootExcludedButOtherPiecesCanMove(2)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T15_OvershootExcludedButOtherPiecesCanMove(3)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T15_OvershootExcludedButOtherPiecesCanMove(4)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T15_OvershootExcludedButOtherPiecesCanMove(5)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T16_ExactCompletionIsNonOccupyingAndImmobile",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T17_VictoryOnSixOverridesBonusAndFreezesNormalCommands",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T18_KnockoutAndCompletionDoNotCreateTheirOwnBonus(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T18_KnockoutAndCompletionDoNotCreateTheirOwnBonus(6)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T19_RepeatedSixesHaveNoCapWithLegalAndEmptyMoves",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T20_ConfiguredOrderWrapsAndInitialPlayerIsExplicit",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T21_RestartClearsStateAndInvalidatesPreviousMoveTokens",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T22_InvalidAndDuplicateActionsPreserveSnapshot",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T23_InvalidConfigurationRejectedAndCollectionsDefensivelyCopied",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T24_DeterministicReplayIncludesEventOrder",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.T25_SeededMatchesEnforceAllInvariants",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.Rules.Tests.RulesTests.WatchdogIsEvidenceNotADrawAndPreservesTrace",
+          "result": "Passed"
+        }
+      ]
+    },
+    "unityPlayMode": {
+      "result": "Passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "source": "artifacts/unity/581e3c0583fe46b4a09cc71a01d63764/results.xml",
+      "sha256": "92753e8da244141144be70ac3b900966b17828213b5703efa5b1a9a043a7d77f",
+      "cases": [
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.BotDelayPacesCommandsAndRestartCancelsPendingTurn",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.DevelopmentScenariosUseNormalSelectionAndRestartRestoresNormalPlay",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.ScenePlaysTwoMatchesAndPresentationFollowsDomainEvents",
+          "result": "Passed"
+        }
+      ]
+    },
+    "unityPlayModeScreenshots": {
+      "result": "Passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "source": "artifacts/unity/e0d185bdd1ae47f389e590a4cdeb43f6/results.xml",
+      "sha256": "a08561593549fa5e5415ff07f5c3d6311151a8e65d78cbd2fda433eb02d4e1b4",
+      "cases": [
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.BotDelayPacesCommandsAndRestartCancelsPendingTurn",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.DevelopmentScenariosUseNormalSelectionAndRestartRestoresNormalPlay",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.ScenePlaysTwoMatchesAndPresentationFollowsDomainEvents",
+          "result": "Passed"
+        }
+      ]
+    }
+  },
+  "dotnet": {
+    "sdk": "8.0.425",
+    "rules": {
+      "passed": 48,
+      "failed": 0
+    },
+    "localMatch": {
+      "passed": 14,
+      "failed": 0,
+      "session": 9,
+      "scenario": 5
+    }
+  },
+  "simulation": {
+    "matches": 1000,
+    "firstSeed": 1,
+    "lastSeed": 1000,
+    "maxRolls": 10000,
+    "completed": 1000,
+    "rolls": 185097,
+    "turns": 154204,
+    "transitions": 291977,
+    "invariantOrHarnessFailures": 0,
+    "failureSeeds": [],
+    "watchdogCases": 0,
+    "watchdogSeeds": [],
+    "policy": "completion-first/furthest-progress/piece-index (test only)",
+    "rng": "xorshift32 with rejection-sampled 1d6",
+    "configuration": "SyntheticBoards.ForSeed; three track sizes and per-owner path lengths; not product canon",
+    "baselineMatchesByteForByte": true
+  },
+  "screenshots": [
+    {
+      "path": "tests/evidence/dc-0005/01-initial.png",
+      "sha256": "51d8c3754c275f01e09edaad5ca43ecf5a8ffef95e1c679ab22bc3f5f9806463"
+    },
+    {
+      "path": "tests/evidence/dc-0005/02-selection.png",
+      "sha256": "c03480d71c76649e3d32700e6444eef4ab2aed5a8c62fbd5e2a9bf3459bb880d"
+    },
+    {
+      "path": "tests/evidence/dc-0005/03-active.png",
+      "sha256": "8421d6253fb172a349aa08eced75a1271fd93d67940870cdca6d667e57dc8b0b"
+    },
+    {
+      "path": "tests/evidence/dc-0005/04-victory.png",
+      "sha256": "d73483b6679fa1fe3f3e7e7b1de51f8c15b4dcc1cdc1269877c9a51343bf3265"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-knockout.png",
+      "sha256": "c74d9811fb245ad45698ca59a1af322ebbf7a84df316e6ab7df3db2154b4ea4b"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-ascension.png",
+      "sha256": "2e38655cc25977a306de64de6a81c59ace34882fee4cc6026b573c61f2c7df5e"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-completion.png",
+      "sha256": "c7b8d98a6a1d9f19f56c86c136a518c85ff6dfb7f3acccab0a5aee21e27bd288"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-victory.png",
+      "sha256": "94f3d47321563aaefc1af40e0ba5dd721921eebc80dc1e34f8dd8b33d05f24dd"
+    }
+  ],
+  "ownerPlaytest": {
+    "reviewer": "product owner",
+    "date": "2026-10-01",
+    "source": "owner report",
+    "commit": "721a35a",
+    "normalPlay": {
+      "result": "PASS",
+      "observed": [
+        "Unity prototype launched",
+        "normal match started",
+        "rolling, movement and bot turns worked"
+      ],
+      "note": "stopped before endgame; manual match took too long"
+    },
+    "endgame": {
+      "A TEST KNOCKOUT": "PASS",
+      "B TEST ASCENSION": "PASS",
+      "C TEST COMPLETION": "PASS",
+      "D TEST VICTORY": "PASS",
+      "E PLAY AGAIN / second normal match starts": "PASS"
+    },
+    "decision": "DC-0005 DONE"
+  },
+  "unityRunLocation": "clean scratch copy of the exact commit file set (tracked files plus new scenario files and their Editor-generated .meta files; untracked local ProjectSettings excluded), because the owner Editor had the project open; raw results copied to ignored artifacts/",
+  "scenarios": [
+    {
+      "name": "TEST KNOCKOUT",
+      "seed": 1,
+      "revision": 193,
+      "die": 4,
+      "click": "Piece 3",
+      "move": "track square 9 -> 13",
+      "events": [
+        "PieceBanished Bot II #2",
+        "PieceMoved Human #3",
+        "TurnAdvanced Bot I"
+      ]
+    },
+    {
+      "name": "TEST ASCENSION",
+      "seed": 1,
+      "revision": 154,
+      "die": 5,
+      "click": "Piece 2",
+      "move": "track square 35 -> Ascension Path 1",
+      "events": [
+        "PieceMoved Human #2",
+        "TurnAdvanced Bot I"
+      ]
+    },
+    {
+      "name": "TEST COMPLETION",
+      "seed": 1,
+      "revision": 269,
+      "die": 1,
+      "click": "Piece 2",
+      "move": "Ascension Path 5 -> home",
+      "events": [
+        "PieceMoved Human #2",
+        "PieceCompleted Human #2",
+        "TurnAdvanced Bot I"
+      ]
+    },
+    {
+      "name": "TEST VICTORY",
+      "seed": 3,
+      "revision": 546,
+      "die": 3,
+      "click": "Piece 4",
+      "move": "Ascension Path 3 -> home (3 already home)",
+      "events": [
+        "PieceMoved Human #4",
+        "PieceCompleted Human #4",
+        "MatchWon Human"
+      ]
+    }
+  ],
+  "normalScreenshotsRegeneratedIdentical": true,
+  "playerBuild": {
+    "target": "Windows x64 (Mono), throwaway compile/isolation check, not a shipped binary",
+    "result": "Build Finished, Result: Success",
+    "managedDemonCodexAssemblies": [
+      "DemonCodex.LocalMatch.dll",
+      "DemonCodex.Presentation.dll",
+      "DemonCodex.Rules.dll"
+    ],
+    "scenarioSymbolsInPlayerPresentationDll": "absent",
+    "log": "artifacts/unity/player-build/build.log"
+  },
+  "notAcceptanceRequirements": [
+    "iOS/Android builds",
+    "touch ergonomics",
+    "IL2CPP"
+  ]
+}

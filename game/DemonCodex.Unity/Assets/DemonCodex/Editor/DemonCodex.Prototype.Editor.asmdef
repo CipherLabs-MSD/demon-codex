@@ -1,0 +1,5 @@
+{
+  "name": "DemonCodex.Prototype.Editor",
+  "references": ["DemonCodex.Presentation", "DemonCodex.Development", "DemonCodex.LocalMatch"],
+  "includePlatforms": ["Editor"]
+}
