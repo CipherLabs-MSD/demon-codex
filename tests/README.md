@@ -37,3 +37,6 @@ DC-0006 adds a read-only pacing analysis of the prototype configuration (shipped
 session and bots, invariants on every transition). Run
 `dotnet run --project tools/DemonCodex.Pacing.Cli -c Release -- 1000 1 artifacts/pacing 10000`;
 [committed results](evidence/dc-0006/pacing-summary.json) feed the [M001 review](../docs/product/M001_REVIEW.md).
+DC-0037 adds nine M001.1 playtest-recorder tests (shared .NET/EditMode) and one PlayMode
+A/B test; see the [experiment contract](../docs/product/M001_1_PACING_FUN_EXPERIMENT.md).
+Human session files belong in `tests/evidence/dc-0037/sessions`.
