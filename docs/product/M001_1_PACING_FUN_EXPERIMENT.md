@@ -55,7 +55,7 @@ match log keeps every event either way. This is a presentation value, not a rule
 | --- | --- |
 | Board, movement, exact completion, summon on six, six bonus, knockout (Banished), safe squares, Ascension Path, victory | Same DC-0004 reducer and prototype configuration; no rule code changed |
 | Bot decision policy | Same `BotPolicy`; tests show identical events for A and B |
-| Dice | Same seed gives the identical die sequence and seat order whatever the human chooses (tested) |
+| Dice | Same seed gives the same die values, rolled by the same seats in the same order, for as long as both matches last (tested). It does **not** make the matches identical: see Known Limitations |
 | Scene, Game view and controls | Same scene; experiment controls live only in the Editor window; the Game view shows no variant name |
 
 Only `BotDelaySeconds` differs.
@@ -72,7 +72,8 @@ Recorded automatically for each session in one JSON file:
 | `botTurnSeconds` | Real time while a bot was due to act; together with human time it equals elapsed time |
 | `rolls`, `humanRolls`, `turns`, `rounds` | Rounds are turns ÷ 4 |
 | `humanActions`, `botActions` | Human ROLL and piece clicks; bot commands |
-| `meaningfulChoices`, `forcedChoices` | Human piece selections with 2+ legal pieces, or exactly one |
+| `meaningfulChoices`, `forcedChoices` | Human piece selections offering 2+ distinct outcomes, or exactly one. Summoning any Abyss piece is one outcome: every Abyss piece lands on the same start square |
+| `equivalentSummonChoices` | Forced selections where several interchangeable Abyss pieces were offered; `meaningfulChoices + equivalentSummonChoices` equals DC-0006's legal-piece count |
 | `humanNoMoveRolls`, `sixes` | Human rolls with no legal move; sixes by anyone |
 | `knockouts`, `humanKnockoutsSuffered`, `summons` | All seats; human pieces Banished; summons |
 | `ascensionEntries`, `completedPieces`, `humanCompletedPieces` | Moves off the shared track into an Ascension Path or home; pieces home |
@@ -81,6 +82,10 @@ Recorded automatically for each session in one JSON file:
 | `answers` | The five questions and an optional note |
 
 Derived in analysis: bot waiting share = `botTurnSeconds` ÷ `elapsedSeconds`.
+
+DC-0006 counted any selection with 2+ legal pieces as a choice (median 32). With
+interchangeable summons excluded, the same 1,000 seeds give a median of **30**
+meaningful choices (p10 14, p90 45); a recorder test reproduces both numbers.
 
 ## Five Playtest Questions
 
@@ -100,6 +105,8 @@ Plus an optional short note.
    `Demon Codex > M001.1 Playtest`.
 2. Each tester plays one **pair**: A and B with the **same seed**. Suggested seeds
    82, 150 and 364 are the DC-0006 seeds closest to the median simulated length.
+   The seed repeats the die rolls, not the match: different choices in A and B
+   still lead to different positions, bot moves, length and winner.
 3. Order: the owner plays A then B (seed 82). Testers who did not build the game
    play B then A, to balance learning and fatigue effects.
 4. Play naturally until someone wins, or press STOP MATCH when you genuinely want
@@ -121,7 +128,7 @@ PROVISIONAL PRODUCT TARGETS — owner approval required:
 | --- | --- | --- |
 | Full-match duration (median) | 8–12 min estimated, never measured | ≤ 10 min |
 | Bot waiting share | 39–56% estimated | ≤ 15% (B alone is predicted to land near 20–30%) |
-| Meaningful choice frequency | about one per 15–22 s estimated | at least one every 20–30 s; longest gap reported |
+| Meaningful choice frequency | about one per 16–23 s estimated (30 per median match) | at least one every 20–30 s; longest gap reported |
 | Fun (question 1) | unmeasured | mean ≥ 4 / 5 |
 | Immediate replay (question 5) | unmeasured | majority Yes or Maybe |
 | Natural completion | owner stopped (0 of 1) | every session ends in victory or a recorded stop reason |
@@ -147,9 +154,9 @@ Thresholds above (25%, ≤ 3, ≥ 4) are provisional.
 ## Evidence Format
 
 One file per session, `tests/evidence/dc-0037/sessions/<startUtc>-<variant>-seed<seed>.json`
-(schema version 1, fields as in Metrics). It is written as soon as the match ends
-or stops, so timing survives skipped questions, and rewritten when answers are
-saved. Abbreviated example:
+(schema version 1, fields as in Metrics). It is written as soon as the match ends,
+is stopped, Play Mode exits or the playtest window closes, so timing survives
+skipped questions, and it is rewritten when answers are saved. Abbreviated example:
 
 ```json
 {
@@ -157,7 +164,7 @@ saved. Abbreviated example:
   "tester": "owner", "seed": 82, "elapsedSeconds": 512.4,
   "humanTurnSeconds": 401.9, "botTurnSeconds": 110.5,
   "naturalVictory": true, "winner": "P0", "aborted": false,
-  "meaningfulChoices": 31, "forcedChoices": 29,
+  "meaningfulChoices": 29, "forcedChoices": 31, "equivalentSummonChoices": 3,
   "answers": { "fun": 4, "matchLength": "good", "control": 3, "waiting": 2, "playAgain": "yes", "note": null }
 }
 ```
@@ -170,17 +177,24 @@ evidence:
 - In the real scene with seed 82 and identical choices, A and B produced
   identical domain events.
 - Measured time per bot command was 0.649 s in A and 0.250 s in B.
-- Recorder counts match an independent tally and the DC-0006 seed-1 figures.
+- Recorder counts match an independent tally and reproduce all 1,000 DC-0006
+  pacing rows. Meaningful choices are checked against an independent rule: two
+  options are equivalent only when they leave the same board.
 - A Windows player build contains no experiment code or text.
 
 ## Known Limitations
 
 - Few sessions; the owner built the game and knows which variant is running.
 - Learning and fatigue effects between the two matches (order is counterbalanced).
-- The same seed repeats the dice within a pair: luck is controlled, but the second
-  match is less novel.
-- Human turn time includes reading and thinking; the clock keeps running if the
-  Editor is paused.
+- **A seed fixes the die rolls, not the match.** A and B with one seed get the same
+  die values in the same seat order, but once the player chooses differently the
+  positions, bot decisions, knockouts, length and winner can all diverge. The same
+  roll can help in one match and be useless in the other, so this reduces dice-luck
+  differences between A and B; it does not remove them. Repeated dice also make the
+  second match of a pair slightly less novel.
+- Human turn time includes reading, thinking and moving from the playtest window
+  to the Game view after pressing A or B; the clock keeps running if the Editor is
+  paused.
 - Desktop Editor only, no mobile or touch. Each bot command can take up to one
   extra frame. No animation exists in either variant.
 - DC-0006 simulation figures are proxy estimates; this experiment replaces them

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace DemonCodex.Development
         public const float ControlBotDelaySeconds = 0.65f; // M001 scene value (LocalMatchController)
         public const float FastBotDelaySeconds = 0.25f;
         // Seeds whose simulated length is closest to the DC-0006 median; use one per A/B pair.
+        // A seed fixes the die stream, not the match: different human choices still change
+        // positions, bot decisions, knockouts, length and winner.
         public static readonly uint[] SuggestedSeeds = { 82, 150, 364 };
         public static readonly string[] Questions = {
             "How fun was the match?",
@@ -33,6 +36,11 @@ namespace DemonCodex.Development
             variant == PlaytestVariant.ControlA ? ControlBotDelaySeconds : FastBotDelaySeconds;
         public static string Label(PlaytestVariant variant) =>
             variant == PlaytestVariant.ControlA ? "CONTROL A — ORIGINAL PACING" : "VARIANT B — FAST BOTS";
+
+        // Distinct outcomes a selection offers. Every Abyss piece summons to the same start square,
+        // so all summon candidates are one option; each advance is its own option.
+        public static int DistinctOptions(IReadOnlyList<LegalMove> legal) =>
+            legal.Count(m => m.Kind != MoveKind.Summon) + (legal.Any(m => m.Kind == MoveKind.Summon) ? 1 : 0);
     }
 
     // One measured session. Plain public fields so the Editor window can keep it across reloads.
@@ -46,7 +54,7 @@ namespace DemonCodex.Development
         public long seed;
         public double elapsedSeconds, humanTurnSeconds, botTurnSeconds, abortSeconds = -1;
         public int humanActions, botActions, rolls, humanRolls, turns = 1, sixes, humanNoMoveRolls;
-        public int meaningfulChoices, forcedChoices, knockouts, humanKnockoutsSuffered, summons;
+        public int meaningfulChoices, forcedChoices, equivalentSummonChoices, knockouts, humanKnockoutsSuffered, summons;
         public int ascensionEntries, completedPieces, humanCompletedPieces;
         public double rounds, longestSecondsWithoutMeaningfulChoice, secondsPerMeaningfulChoice = -1, meaningfulChoicesPerMinute;
         public bool naturalVictory, aborted, answered;
@@ -82,6 +90,7 @@ namespace DemonCodex.Development
             Field("rolls", Int(rolls)); Field("humanRolls", Int(humanRolls)); Field("turns", Int(turns));
             Field("rounds", Number(rounds)); Field("humanActions", Int(humanActions)); Field("botActions", Int(botActions));
             Field("meaningfulChoices", Int(meaningfulChoices)); Field("forcedChoices", Int(forcedChoices));
+            Field("equivalentSummonChoices", Int(equivalentSummonChoices));
             Field("humanNoMoveRolls", Int(humanNoMoveRolls)); Field("sixes", Int(sixes));
             Field("knockouts", Int(knockouts)); Field("humanKnockoutsSuffered", Int(humanKnockoutsSuffered));
             Field("summons", Int(summons)); Field("ascensionEntries", Int(ascensionEntries));
@@ -176,13 +185,18 @@ namespace DemonCodex.Development
                 Record.humanActions++;
                 if (before.Phase == MatchPhase.AwaitingSelection)
                 {
-                    if (RulesEngine.LegalMoves(before, human, before.PendingRoll.Value).Count > 1)
+                    var legal = RulesEngine.LegalMoves(before, human, before.PendingRoll.Value);
+                    if (PlaytestExperiment.DistinctOptions(legal) > 1)
                     {
                         Record.meaningfulChoices++;
                         Record.longestSecondsWithoutMeaningfulChoice = Math.Max(Record.longestSecondsWithoutMeaningfulChoice, now - lastChoiceAt);
                         lastChoiceAt = now;
                     }
-                    else Record.forcedChoices++;
+                    else
+                    {
+                        Record.forcedChoices++; // one distinct outcome, even if several identical summons were offered
+                        if (legal.Count > 1) Record.equivalentSummonChoices++;
+                    }
                 }
             }
             else Record.botActions++;

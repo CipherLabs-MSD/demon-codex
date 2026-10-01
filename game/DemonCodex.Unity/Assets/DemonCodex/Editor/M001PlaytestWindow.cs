@@ -34,14 +34,23 @@ namespace DemonCodex.Editor
         private bool HasPending => pending != null && !string.IsNullOrEmpty(pending.variant);
 
         private void OnEnable() { EditorApplication.playModeStateChanged += OnPlayModeChanged; }
-        private void OnDisable() { EditorApplication.playModeStateChanged -= OnPlayModeChanged; }
+        private void OnDisable()
+        {
+            // The recorder is not serializable: save before the window closes or scripts reload.
+            FinishSession("playtest window closed or scripts reloaded", focus: false);
+            EditorApplication.playModeStateChanged -= OnPlayModeChanged;
+        }
         private void OnPlayModeChanged(PlayModeStateChange change)
         {
-            if (change == PlayModeStateChange.ExitingPlayMode && recorder != null && recorder.IsRecording)
-            {
-                recorder.Abort("Play Mode exited");
-                Complete();
-            }
+            if (change == PlayModeStateChange.ExitingPlayMode) FinishSession("Play Mode exited", focus: true);
+        }
+
+        // Every ending (victory, stop, Play Mode exit, window close) saves the session exactly once.
+        private void FinishSession(string reasonIfStillRecording, bool focus)
+        {
+            if (recorder == null) return;
+            if (recorder.IsRecording) recorder.Abort(reasonIfStillRecording);
+            Complete(focus);
         }
 
         private void OnInspectorUpdate()
@@ -50,7 +59,7 @@ namespace DemonCodex.Editor
             {
                 if (recorder.IsRecording && (controller == null || controller.Session != recorder.Session))
                     recorder.Abort("match replaced outside the playtest window");
-                if (!recorder.IsRecording) Complete();
+                if (!recorder.IsRecording) Complete(focus: true);
             }
             Repaint();
         }
@@ -63,14 +72,14 @@ namespace DemonCodex.Editor
             pending = null; savedFile = null;
         }
 
-        private void Complete()
+        private void Complete(bool focus)
         {
             pending = recorder.Record;
             recorder = null;
             PlaytestLauncher.RestoreControlPacing(controller);
             fun = length = control = waiting = again = -1; note = "";
             savedFile = Path.GetFileName(PlaytestFiles.Save(pending, SessionsDirectory)); // timing is kept even if questions are skipped
-            Focus();
+            if (focus) Focus();
         }
 
         private void OnGUI()
@@ -87,7 +96,7 @@ namespace DemonCodex.Editor
         {
             testerIndex = EditorGUILayout.Popup("Who is playing?", testerIndex, TesterLabels);
             seed = Math.Max(0, Math.Min(uint.MaxValue, EditorGUILayout.LongField("Seed", seed)));
-            EditorGUILayout.LabelField("Use the same seed for A and B. Suggested: " +
+            EditorGUILayout.LabelField("Use the same seed for A and B (same dice; choices still change the match). Suggested: " +
                 string.Join(", ", PlaytestExperiment.SuggestedSeeds) + ".", EditorStyles.wordWrappedMiniLabel);
             if (!string.IsNullOrEmpty(savedFile)) EditorGUILayout.HelpBox("Saved: " + savedFile, MessageType.None);
             bool ready = Application.isPlaying && !EditorApplication.isPaused && FindAnyObjectByType<LocalMatchController>() != null;
@@ -102,11 +111,7 @@ namespace DemonCodex.Editor
             var r = recorder.Record; // no running clock on screen: it could bias felt length
             EditorGUILayout.HelpBox("RECORDING  " + PlaytestExperiment.Label((PlaytestVariant)Enum.Parse(typeof(PlaytestVariant), r.variant)) +
                 "\nSeed " + r.seed + " · started " + r.startUtc + "\nPlay in the Game view until someone wins.", MessageType.None);
-            if (GUILayout.Button("STOP MATCH — I WANT TO STOP", GUILayout.Height(34)))
-            {
-                recorder.Abort("player stopped");
-                Complete();
-            }
+            if (GUILayout.Button("STOP MATCH — I WANT TO STOP", GUILayout.Height(34))) FinishSession("player stopped", focus: true);
         }
 
         private void DrawQuestions()

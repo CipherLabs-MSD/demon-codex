@@ -20,7 +20,7 @@ namespace DemonCodex.LocalMatchTests
         {
             public const double HumanThink = 2.0;
             public double Now, HumanSeconds, BotSeconds;
-            public int HumanActions, BotActions, Choices, Forced;
+            public int HumanActions, BotActions, Choices, Forced, EquivalentSummons;
             public readonly List<double> ChoiceTimes = new List<double>();
             public readonly List<(bool human, Transition transition)> Log = new List<(bool, Transition)>();
             public readonly LocalMatchSession Session;
@@ -47,7 +47,9 @@ namespace DemonCodex.LocalMatchTests
                     if (Session.State.Phase == MatchPhase.AwaitingRoll) Assert.That(Session.RollHuman(), Is.True);
                     else
                     {
-                        if (Session.LegalMoves.Count > 1) { Choices++; ChoiceTimes.Add(Now); } else Forced++;
+                        var legal = Session.LegalMoves;
+                        if (DistinctBoards(Session.State, legal) > 1) { Choices++; ChoiceTimes.Add(Now); }
+                        else { Forced++; if (legal.Count > 1) EquivalentSummons++; }
                         Assert.That(Session.SelectHuman(BotPolicy.Choose(Session.State, Session.LegalMoves)), Is.True);
                     }
                 }
@@ -89,13 +91,14 @@ namespace DemonCodex.LocalMatchTests
         }
 
         private static string Gameplay(PlaytestRecord r) => string.Join(",", r.seed, r.winner, r.naturalVictory, r.rolls,
-            r.humanRolls, r.turns, r.humanActions, r.botActions, r.meaningfulChoices, r.forcedChoices, r.humanNoMoveRolls,
+            r.humanRolls, r.turns, r.humanActions, r.botActions, r.meaningfulChoices, r.forcedChoices, r.equivalentSummonChoices, r.humanNoMoveRolls,
             r.sixes, r.knockouts, r.humanKnockoutsSuffered, r.summons, r.ascensionEntries, r.completedPieces, r.humanCompletedPieces);
 
         [Test]
         public void SameSeedDealsIdenticalDiceWhateverTheHumanChooses()
         {
-            // Matched A/B pairs rely on this: the die stream and its seat order do not depend on choices.
+            // A seed fixes the die stream and which seat rolls each value, for as long as both matches last.
+            // It does NOT fix the match: once choices differ, positions, bot decisions and length diverge.
             var policy = new LocalMatchSession(82); var contrary = new LocalMatchSession(82);
             var policyRolls = new List<string>(); var contraryRolls = new List<string>();
             policy.Transitioned += t => policyRolls.AddRange(t.Events.Where(e => e.Kind == EventKind.DieRolled).Select(e => e.Player + ":" + e.Roll));
@@ -139,6 +142,8 @@ namespace DemonCodex.LocalMatchTests
             Assert.That(r.humanCompletedPieces, Is.EqualTo(h.Session.State.Pieces.Count(p => p.Owner == PlayerId.P0 && p.Position.Kind == PieceKind.Completed)));
             Assert.That(r.humanActions, Is.EqualTo(h.HumanActions)); Assert.That(r.botActions, Is.EqualTo(h.BotActions));
             Assert.That(r.meaningfulChoices, Is.EqualTo(h.Choices)); Assert.That(r.forcedChoices, Is.EqualTo(h.Forced));
+            Assert.That(r.equivalentSummonChoices, Is.EqualTo(h.EquivalentSummons));
+            Assert.That(r.equivalentSummonChoices, Is.GreaterThan(0), "Seed 1 exercises interchangeable Abyss summons.");
             // Time attribution: human turn time plus bot presentation time is the whole session.
             Assert.That(r.humanTurnSeconds, Is.EqualTo(h.HumanSeconds).Within(1e-6));
             Assert.That(r.botTurnSeconds, Is.EqualTo(h.BotSeconds).Within(1e-6));
@@ -149,10 +154,11 @@ namespace DemonCodex.LocalMatchTests
             Assert.That(r.meaningfulChoicesPerMinute, Is.EqualTo(h.Choices / (h.Now / 60)).Within(1e-6));
             Assert.That(r.startUtc, Is.EqualTo("2026-10-01T12:00:00Z"));
             Assert.That(r.endUtc, Is.EqualTo(Epoch.AddSeconds(h.Now).UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")));
-            // Same counts as tests/evidence/dc-0006/pacing-matches.csv, seed 1 (independent tool).
+            // Seed 1 in tests/evidence/dc-0006/pacing-matches.csv (independent tool) counted 23 choices and 32 forced
+            // by legal-piece count; 2 of those 23 offered only interchangeable Abyss summons.
             Assert.That(new[] { r.humanActions, r.botActions, r.rolls, r.humanRolls, r.turns, r.sixes, r.humanNoMoveRolls,
-                r.meaningfulChoices, r.forcedChoices, r.knockouts, r.humanKnockoutsSuffered, r.summons, r.humanCompletedPieces },
-                Is.EqualTo(new[] { 116, 342, 249, 61, 212, 37, 6, 23, 32, 8, 3, 20, 3 }));
+                r.meaningfulChoices, r.forcedChoices, r.equivalentSummonChoices, r.knockouts, r.humanKnockoutsSuffered, r.summons, r.humanCompletedPieces },
+                Is.EqualTo(new[] { 116, 342, 249, 61, 212, 37, 6, 21, 34, 2, 8, 3, 20, 3 }));
             Assert.That(r.winner, Is.EqualTo("P3"));
             Assert.That(r.ToJson(), Does.Contain("\"abortSeconds\": null").And.Contain("\"naturalVictory\": true").And.Contain("\"answers\": null"));
         }
@@ -189,6 +195,62 @@ namespace DemonCodex.LocalMatchTests
             Assert.That(h.Recorder.Record.aborted, Is.True);
             Assert.That(h.Recorder.Record.abortReason, Is.EqualTo("match restarted before victory"));
             Assert.That(h.Recorder.Record.humanActions + h.Recorder.Record.botActions, Is.EqualTo(10));
+        }
+
+        // Independent definition: options are equivalent when they leave the same board (owners and
+        // positions), ignoring which numbered piece moved.
+        private static int DistinctBoards(MatchState state, IReadOnlyList<LegalMove> legal) => legal.Select(m =>
+            string.Join(";", RulesEngine.Apply(state, new SelectMove(state.ActivePlayer, m, state.Revision)).State.Pieces
+                .Select(p => p.Owner + "@" + p.Position.Kind + ":" + p.Position.Step).OrderBy(x => x, StringComparer.Ordinal)))
+            .Distinct().Count();
+
+        [Test]
+        public void DistinctOptionsTreatOnlyAbyssSummonsAsInterchangeable()
+        {
+            int selections = 0, equivalent = 0;
+            for (uint seed = 1; seed <= 40; seed++)
+            {
+                var s = new LocalMatchSession(seed);
+                Play(s, legal =>
+                {
+                    selections++;
+                    Assert.That(PlaytestExperiment.DistinctOptions(legal), Is.EqualTo(DistinctBoards(s.State, legal)), "seed " + seed);
+                    if (legal.Count > 1 && PlaytestExperiment.DistinctOptions(legal) == 1) equivalent++;
+                    return BotPolicy.Choose(s.State, legal);
+                });
+            }
+            Assert.That(equivalent, Is.GreaterThan(0));
+            Assert.That(selections, Is.GreaterThan(1000));
+        }
+
+        [Test]
+        public void RecorderReproducesDc0006PacingEvidenceForAllSeeds()
+        {
+            // Cross-tool check against the committed DC-0006 CSV (seeds 1-1000, bot policy as the human proxy).
+            var rows = File.ReadAllLines(Repo("tests/evidence/dc-0006/pacing-matches.csv"));
+            var header = rows[0].Split(',');
+            var meaningful = new List<int>();
+            foreach (var line in rows.Skip(1))
+            {
+                var row = line.Split(',');
+                int Col(string name) => int.Parse(row[Array.IndexOf(header, name)]);
+                var r = new Harness(PlaytestVariant.ControlA, uint.Parse(row[0])).RunToEnd().Recorder.Record;
+                Assert.That(r.winner, Is.EqualTo(row[1]), "seed " + row[0]);
+                // DC-0006 counted choices by legal-piece count, so it includes interchangeable Abyss summons.
+                Assert.That(new[] { r.humanActions, r.botActions, r.rolls, r.humanRolls, r.turns, r.sixes, r.humanNoMoveRolls,
+                    r.meaningfulChoices + r.equivalentSummonChoices, r.forcedChoices - r.equivalentSummonChoices,
+                    r.knockouts, r.humanKnockoutsSuffered, r.summons, r.humanCompletedPieces },
+                    Is.EqualTo(new[] { Col("human_commands"), Col("bot_commands"), Col("rolls"), Col("human_rolls"),
+                        Col("turns"), Col("sixes"), Col("human_no_move_rolls"), Col("human_choice_selections"),
+                        Col("human_forced_selections"), Col("knockouts"), Col("human_pieces_banished"),
+                        Col("summons"), Col("human_completed") }), "seed " + row[0]);
+                meaningful.Add(r.meaningfulChoices);
+            }
+            Assert.That(meaningful.Count, Is.EqualTo(1000));
+            meaningful.Sort();
+            TestContext.WriteLine("Meaningful choices per match with interchangeable summons excluded: median " +
+                meaningful[499] + ", p10 " + meaningful[99] + ", p90 " + meaningful[899]);
+            Assert.That(meaningful[499], Is.EqualTo(30), "DC-0006 reported a median of 32 by legal-piece count.");
         }
 
         [Test]
@@ -255,6 +317,9 @@ namespace DemonCodex.LocalMatchTests
                 foreach (var source in Directory.GetFiles(Asset(folder), "*.cs"))
                     Assert.That(File.ReadAllText(source), Does.Not.Contain("Playtest"), source);
         }
+
+        private static string Repo(string relative, [CallerFilePath] string here = "") =>
+            Path.GetFullPath(Path.Combine(Path.GetDirectoryName(here), "..", "..", "..", "..", "..", "..", relative));
 
         private static string Asset(string relative, [CallerFilePath] string here = "")
         {
