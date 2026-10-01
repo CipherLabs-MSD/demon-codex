@@ -16,7 +16,8 @@ evidence for completed tasks. A blocked task records reason, owner and unblock a
 Foundation v0.1 is human-approved; DC-0001 is DONE. The owner approved the
 DC-0002 specification and G1–G6 rulings; DC-0002 is DONE. Remaining board parameters
 and separate design policies do not block this approval. DC-0004 is DONE after explicit human approval and successful Unity EditMode
-validation (48 passed, 0 failed). DC-0005 remains BACKLOG and unstarted.
+validation (48 passed, 0 failed). DC-0005 is REVIEW / TEST: the local prototype and automated evidence are ready;
+owner playtest acceptance is pending. DC-0006 remains BACKLOG.
 The product owner explicitly
 resolved DC-0003 independently through ADR 0002; its prior foundation-review
 dependency is waived for that decision only. Other foundation outputs do not imply approval.
@@ -27,7 +28,7 @@ dependency is waived for that decision only. Other foundation outputs do not imp
 | DC-0002 | Core Game | Specify board and turn rules | Product owner (review); rules agent (specification) | P0 | DC-0001 | Specify supplied mechanics, resolve G1–G6, and record explicit topology unknowns with owner approval | [Rules and edge cases](../GDD.md), [test matrix](../../tests/M001_RULE_TEST_MATRIX.md), [review record](DC_0002_REVIEW.md); explicit human approval of PR #2 / G1–G6 | DONE | M001 |
 | DC-0003 | Core Game | Accept Unity 6 engine decision | Product owner | P0 | None (human decision; see note above) | Record accepted Unity 6 decision, mobile direction and local M001 boundaries | [Accepted ADR 0002](../adr/0002-unity-6-engine.md); explicit human approval | DONE | M001 |
 | DC-0004 | Core Game | Implement deterministic rules core | Core Game lead (unassigned) | P0 | DC-0002, DC-0003 | Legal moves, turns, knockout, home and win follow approved rules | [Implementation/evidence](DC_0004_EVIDENCE.md): 48 .NET tests, 1000 completed matches, 48 Unity EditMode tests passed; human-approved | DONE | M001 |
-| DC-0005 | Core Game | Build local match UI and bots | Core Game lead (unassigned) | P0 | DC-0004 | One human and three bots can start, finish and restart a match | Manual complete-match record | BACKLOG | M001 |
+| DC-0005 | Core Game | Build local match UI and bots | Core Game lead (unassigned) | P0 | DC-0004 | One human and three bots can start, finish and restart a match | [Playable scene, executed tests and pending owner checklist](DC_0005_EVIDENCE.md) | REVIEW / TEST | M001 |
 | DC-0006 | Release | Validate M001 and capture playtest | Release lead (unassigned) | P0 | DC-0005 | All O001 KRs evidenced including simulations and clean setup | Test outputs, seed suite, playtest and owner decision | BACKLOG | M001 |
 | DC-0007 | Game Feel | Explore readable feedback | Game Feel lead (unassigned) | P1 | DC-0006 | Review movement, dice and knockout feedback with accessibility notes | Recorded comparison and feedback | BACKLOG | Later |
 | DC-0008 | Demon Data | Review public entity contract | Demon Data lead (unassigned) | P1 | DC-0001 | Review schema, uniqueness and migration; no roster generation | Schema review and future validator plan | BACKLOG | Later |

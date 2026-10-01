@@ -1,7 +1,8 @@
 # DC-0004 — Deterministic rules core evidence
 
 Status: DONE — explicitly approved by the human product owner on 2026-10-01
-after successful Unity EditMode validation. DC-0005 remains BACKLOG.
+after successful Unity EditMode validation. At that approval DC-0005 was BACKLOG;
+its subsequent work is tracked in [DC-0005 evidence](DC_0005_EVIDENCE.md).
 Scope: first domain implementation, not DC-0005's playable UI or final bot AI.
 Based on approved main `614ba9bbbdf6428d8da80e284aab4ebe4ea480b3` and [GDD](../GDD.md).
 
