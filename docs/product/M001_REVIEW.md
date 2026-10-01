@@ -2,8 +2,8 @@
 
 Task: DC-0006 (validate M001 and capture playtest). Date: 2026-10-01.
 Reviewed main: `f9d30b0ce38a44dd48d6690bb094dcba877ad7b6` (DC-0005 merged).
-Status: **REVIEW / TEST** — evidence is complete; the product owner's
-GO / ITERATE / STOP decision is not yet recorded. Reviewer recommendation: **ITERATE**.
+Status: **DONE** — M001 is closed. Product-owner decision: **ITERATE** (2026-10-01).
+KR2–KR5 PASS; KR1 remains PARTIAL and carries into the next iteration.
 
 ## Objective
 
@@ -53,10 +53,11 @@ backend, online play, mobile builds.
 | KR2 Seeded automated matches finish without invalid state | Seeds, commands, results, invariant checks and explicit timeouts | 2 × 1,000 seeded matches (synthetic boards; prototype board with shipped bots), per-seed CSV, invariants on every transition, 10,000-roll budget, 0 failures/watchdogs | **PASS** |
 | KR3 Core approved rules pass automated tests | Rule-to-test mapping and passing run | T01–T25 matrix; 48/48 in .NET, Unity and CI | **PASS** |
 | KR4 Clean setup works from documented instructions | Fresh-checkout build/run record | Fresh clone of `f9d30b0`: foundation, 48 + 14 .NET tests, simulation + baseline, Unity EditMode 62 and PlayMode 3 all pass. Same machine with tools preinstalled; not a new contributor. | **PASS** (caveats below) |
-| KR5 Capture human playtest feedback and a continuation decision | Observations, friction points and owner go/iterate/stop decision | Observations and friction captured here (one owner session). Owner decision **not yet recorded**. Requires subjective owner judgment. | **PARTIAL** |
+| KR5 Capture human playtest feedback and a continuation decision | Observations, friction points and owner go/iterate/stop decision | Observations and friction captured here (one owner session). Owner decision recorded: **ITERATE**, 2026-10-01 (see Continuation Decision). | **PASS** |
 
 No KR is FAIL. KR1 is partial *because* of the pacing observation below; nothing
-technical prevents a human from finishing a match.
+technical prevents a human from finishing a match. The owner closed M001 with KR1
+still PARTIAL; a timed full human match is part of the next experiment.
 
 ## Human Playtest Findings
 
@@ -163,10 +164,10 @@ M001 exit gate requires that a reviewer confirms all acceptance evidence and the
 product owner records whether to iterate or proceed.
 
 Reviewer confirmation: technical viability and the playable loop are evidenced
-(KR2–KR4 PASS). KR1 and KR5 are PARTIAL. "Worth developing further" is not yet
-evidenced.
+(KR2–KR4 PASS). Before the owner decision, KR1 and KR5 were PARTIAL. "Worth
+developing further" is not yet evidenced.
 
-**Recommendation (PROPOSAL): ITERATE.**
+Reviewer recommendation: ITERATE.
 
 - Not STOP: no blocking defect and no negative signal beyond an unexplained length
   concern.
@@ -174,12 +175,28 @@ evidenced.
   largest open uncertainty — whether the core loop is enjoyable at its length.
 - ITERATE: run one focused pacing and fun playtest before expanding scope.
 
-**Owner decision: PENDING.** The product owner records GO / ITERATE / STOP, with
-date, in this section. DC-0006 becomes DONE only after that record.
+### Owner decision — ITERATE (2026-10-01)
+
+Recorded by the product owner. Rationale, as given:
+
+- Technical viability is proven.
+- The deterministic rules engine is stable.
+- The human-vs-bots prototype works.
+- Automated evidence is strong.
+- Core human interaction has been validated.
+- Fun, pacing, tension, replay value and differentiation from generic Ludo/Fia
+  are not yet sufficiently validated.
+- The owner paused a normal match before the endgame because it felt long. This
+  is a product signal, not proof of a specific pacing defect.
+- Therefore the project continues with a focused pacing/fun iteration before
+  larger systems such as collection, economy, Forge, backend, blockchain or NFTs.
+
+This record completes KR5 and the M001 exit gate. M001 is closed; DC-0006 is DONE.
 
 ## Recommended Next Experiment
 
-PROPOSAL — not started, needs owner approval:
+PROPOSAL — direction endorsed by the ITERATE decision; scope, targets and start
+still need owner approval. Not started:
 **M001.1 Pacing and fun playtest** ([DC-0037](MASTER_BACKLOG.md)).
 
 Question: is a complete human match enjoyable at its current length, and which

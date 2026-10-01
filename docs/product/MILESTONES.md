@@ -5,7 +5,7 @@ WORKING DECISION: docs, instructions, initial backlog, schema proposal, ADR proc
 CI and reviewable commits. Evidence: [foundation review](FOUNDATION_REVIEW.md).
 
 ## M001 — First Playable (v0.01)
-WORKING DECISION: supports O001 / KR1–KR5. Status: in progress — DC-0004 rules core is human-approved DONE; DC-0005 local Unity prototype is human-accepted DONE (2026-10-01). DC-0006 is REVIEW / TEST: the [M001 review](M001_REVIEW.md) confirms the evidence and recommends ITERATE; the exit gate awaits the product owner's recorded decision.
+WORKING DECISION: supports O001 / KR1–KR5. Status: in progress — DC-0004 rules core is human-approved DONE; DC-0005 local Unity prototype is human-accepted DONE (2026-10-01). DC-0006 is DONE. **M001 is closed (2026-10-01) with the product-owner decision ITERATE**; see the [M001 review](M001_REVIEW.md). KR2–KR5 PASS; KR1 remains PARTIAL (no continuous human match to victory).
 
 Acceptance: START → ROLL → SELECT → MOVE → KNOCK OUT → REACH HOME → WIN → RESTART.
 One human can complete a match against three bots with four pieces per player,
@@ -28,7 +28,8 @@ and the primary mobile client (iOS/Android direction). Exit gate: reviewer confi
 product owner records whether to iterate or proceed. No dates or budget promised.
 
 ## M001.1 — Pacing and fun playtest (PROPOSAL)
-Not approved or started. Proposed only if the owner chooses ITERATE: timed complete
+Not started. The ITERATE decision endorses a focused pacing/fun iteration; this
+scope, its targets and its start still need owner approval. Timed complete
 human matches, including players who did not build the game, plus at most one
 pacing variant that does not change approved rules ([DC-0037](MASTER_BACKLOG.md)).
 It answers whether the core loop is enjoyable at its length before any scope expands.
