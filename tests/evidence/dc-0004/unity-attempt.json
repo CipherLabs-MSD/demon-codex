@@ -1,0 +1,211 @@
+{
+  "editor": "6000.6.3f1",
+  "revision": "45d8eee7de74",
+  "mode": "batchmode, nographics, EditMode",
+  "exitCode": 0,
+  "status": "PASSED",
+  "testsExecuted": 48,
+  "passed": 48,
+  "failed": 0,
+  "skipped": 0,
+  "projectImportVerified": true,
+  "sourceResults": "artifacts/unity/e668cc08def3423e852dd4dab9cfe5e8/results.xml",
+  "sourceSha256": "57dda8749d86358e68dc4a8984b6aa0cf33fdb2697a5885438922ee38578c840",
+  "startTimeUtc": "2026-10-01 08:43:32Z",
+  "endTimeUtc": "2026-10-01 08:43:32Z",
+  "results": [
+    {
+      "test": "InvariantDiagnosticsDetectCorruption",
+      "outcome": "Passed"
+    },
+    {
+      "test": "LargeRouteArithmeticAndRevisionDoNotOverflow",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T01_Initialization",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T02_SummonOnlyOnSix(1)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T02_SummonOnlyOnSix(2)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T02_SummonOnlyOnSix(3)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T02_SummonOnlyOnSix(4)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T02_SummonOnlyOnSix(5)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T02_SummonOnlyOnSix(6)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T03_FriendlyStartBlocksSummonButAllowsAdvance",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T04_ExactMovementAndSharedIndexWrap(1)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T04_ExactMovementAndSharedIndexWrap(2)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T04_ExactMovementAndSharedIndexWrap(3)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T04_ExactMovementAndSharedIndexWrap(4)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T04_ExactMovementAndSharedIndexWrap(5)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T04_ExactMovementAndSharedIndexWrap(6)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T05_CompleteMoveSetIncludesSummonAndAdvance",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T06_TestPolicyIsDeterministicAndLegal",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T07_NoLegalMoveAdvancesTurn(1)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T07_NoLegalMoveAdvancesTurn(2)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T07_NoLegalMoveAdvancesTurn(3)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T07_NoLegalMoveAdvancesTurn(4)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T07_NoLegalMoveAdvancesTurn(5)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T08_SixBonusAfterMove",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T09_NoMoveSixStillGrantsBonus",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T10_KnockoutIsAtomicAndResetsVictim",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T11_AllSafeDestinationsBlockOpponentsButAllowEmptyEntry",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T12_FriendlyTrackAndPathOccupancyRejectDestinations",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T13_IntermediateOccupancyNeverBlocksOrCaptures",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T14_TrackToPrivatePathAndMinimalPath(1)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T14_TrackToPrivatePathAndMinimalPath(4)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T15_OvershootExcludedButOtherPiecesCanMove(1)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T15_OvershootExcludedButOtherPiecesCanMove(2)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T15_OvershootExcludedButOtherPiecesCanMove(3)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T15_OvershootExcludedButOtherPiecesCanMove(4)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T15_OvershootExcludedButOtherPiecesCanMove(5)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T16_ExactCompletionIsNonOccupyingAndImmobile",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T17_VictoryOnSixOverridesBonusAndFreezesNormalCommands",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T18_KnockoutAndCompletionDoNotCreateTheirOwnBonus(1)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T18_KnockoutAndCompletionDoNotCreateTheirOwnBonus(6)",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T19_RepeatedSixesHaveNoCapWithLegalAndEmptyMoves",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T20_ConfiguredOrderWrapsAndInitialPlayerIsExplicit",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T21_RestartClearsStateAndInvalidatesPreviousMoveTokens",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T22_InvalidAndDuplicateActionsPreserveSnapshot",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T23_InvalidConfigurationRejectedAndCollectionsDefensivelyCopied",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T24_DeterministicReplayIncludesEventOrder",
+      "outcome": "Passed"
+    },
+    {
+      "test": "T25_SeededMatchesEnforceAllInvariants",
+      "outcome": "Passed"
+    },
+    {
+      "test": "WatchdogIsEvidenceNotADrawAndPreservesTrace",
+      "outcome": "Passed"
+    }
+  ],
+  "note": "Verified supplied XML and accompanying editor log. Replaces the previous license-blocked attempt; no mobile or IL2CPP build validation claimed."
+}

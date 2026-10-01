@@ -1,0 +1,8 @@
+{
+  "name": "DemonCodex.Simulation",
+  "rootNamespace": "DemonCodex.Simulation",
+  "references": ["DemonCodex.Rules"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": false,
+  "noEngineReferences": true
+}

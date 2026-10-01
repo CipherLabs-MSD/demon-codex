@@ -1,8 +1,12 @@
 # M001 rule-to-test matrix — DC-0004 input
 
-WORKING DECISION: this is a test specification, not executable gameplay tests.
-Source of truth: [GDD](../docs/GDD.md). Every case below is **NOT RUN** because no
-gameplay implementation exists. The product owner explicitly approved G1–G6;
+WORKING DECISION: this matrix now maps to executable NUnit tests in
+[RulesTests.cs](../game/DemonCodex.Unity/Assets/DemonCodex/Tests/EditMode/RulesTests.cs).
+Source of truth: [GDD](../docs/GDD.md). T01–T25 passed in the .NET run (48 total
+cases including parameterizations and extra diagnostics); see [actual results](evidence/dc-0004/unit-tests.json).
+Unity 6000.6.3f1 EditMode also executed all **48 cases: 48 passed, 0 failed, 0 skipped**,
+verified from the supplied 2026-10-01 result XML. See [Unity results](evidence/dc-0004/unity-attempt.json)
+and [evidence](../docs/product/DC_0004_EVIDENCE.md) for both runners. The product owner explicitly approved G1–G6;
 all corresponding expected outcomes are unconditional M001 requirements. Test IDs are stable; add cases without renumbering.
 
 Use synthetic validated L/F/start/safety/order fixtures with labeled test-only
@@ -38,6 +42,8 @@ choices and seeds. Compare complete snapshots and ordered events, not only visua
 | T24 | R01–R21 | Replay same initial state, externally supplied rolls/choices twice | Identical snapshots and ordered event traces; no clock or RNG dependence (I12) |
 | T25 | R01–R21 | Future seeded simulations across approved configs | Check I01–I12 after every action; report seed/trace on failure and watchdog noncompletion separately |
 
-Human review has approved G1–G6 and the resulting M001 expectations.
-Rule review and this matrix are DC-0002 evidence; actual passing
-tests/simulations belong to DC-0004 and the M001 exit evidence, not this task.
+Human review has approved G1–G6 and the resulting M001 expectations. Each T-prefixed
+method executes its corresponding row. T25 runs 12 integration matches in the
+unit suite; the [separate 1000-match batch](evidence/dc-0004/summary.json) also passed
+with zero invariant failures or watchdog cases. These are DC-0004 implementation
+results, not proof of a playable UI or M001 completion.

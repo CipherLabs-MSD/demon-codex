@@ -16,3 +16,15 @@ coverage/
 *.log
 .idea/
 .vscode/
+# Unity-generated and .NET build/test output
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Bb]in/
+**/[Ll]ogs/
+**/UserSettings/
+**/MemoryCaptures/
+**/Recordings/
+**/TestResults/
+artifacts/
+*.csproj.user

@@ -42,8 +42,10 @@ Engine coupling and migration costs must be managed through clear boundaries.
 Mobile build prerequisites, licensing suitability and device performance still need
 review during setup; this decision supplies no budget or performance guarantees.
 
-UNKNOWN: exact Unity 6 editor release, package versions, rendering approach and
-device baseline. These are setup details, not an open engine-selection task.
+At engine acceptance, exact editor/package versions were UNKNOWN. DC-0004 now
+pins 6000.6.3f1 and its minimal test package graph in the [project readme](../../game/DemonCodex.Unity/README.md).
+Rendering approach and device baseline remain UNKNOWN; these are setup details,
+not an open engine-selection task.
 At engine acceptance, detailed board rules remained UNKNOWN. The subsequent
 [DC-0002 specification](../GDD.md) now records human-approved mechanics and
 separately pending configuration/design choices without changing this engine decision. No project scaffold or game

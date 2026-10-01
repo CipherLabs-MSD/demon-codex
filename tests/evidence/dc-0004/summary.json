@@ -1,0 +1,17 @@
+{
+  "matches": 1000,
+  "firstSeed": 1,
+  "lastSeed": 1000,
+  "maxRolls": 10000,
+  "completed": 1000,
+  "rolls": 185097,
+  "turns": 154204,
+  "transitions": 291977,
+  "invariantOrHarnessFailures": 0,
+  "failureSeeds": [],
+  "watchdogCases": 0,
+  "watchdogSeeds": [],
+  "policy": "completion-first/furthest-progress/piece-index (test only)",
+  "rng": "xorshift32 with rejection-sampled 1d6",
+  "configuration": "SyntheticBoards.ForSeed; three track sizes and per-owner path lengths; not product canon"
+}

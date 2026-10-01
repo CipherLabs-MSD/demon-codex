@@ -1,16 +1,16 @@
 # Architecture
 
-WORKING DECISION: this is a documentation-first repository with logical boundaries,
+WORKING DECISION: this repository has a plain C# rules core with logical boundaries,
 not a deployed service topology. See [ADR 0001](adr/0001-foundation-boundaries.md).
 
 | Area | Responsibility | Current state |
 | --- | --- | --- |
-| game | Rules, turns, bot choices, presentation adapters | No implementation |
+| game | Immutable match/configuration, legal moves, command reducer, ordered events and invariants | Plain C# core; no presentation |
 | content | Versioned authoring contracts and approved public content | Proposed schema |
 | backend | Future accounts, inventory authority and online systems | Deferred |
 | assets | Reviewed art/audio with rights metadata | Empty of media |
 | blockchain | Optional exceptional provenance adapter | Deferred; no code |
-| tools/tests | Foundation checks and future evidence | Documentation checks only |
+| tools/tests | NUnit, deterministic simulation and foundation/link checks | 48 .NET and 48 Unity EditMode tests passed; 1000 simulated matches completed |
 
 WORKING DECISION: the [DC-0002 rules specification](GDD.md) defines a deterministic
 local rules core, explicit state transitions and externally supplied die results.
@@ -20,8 +20,15 @@ distributed backend to solve a local prototype problem.
 
 ACCEPTED: [ADR 0002](adr/0002-unity-6-engine.md) selects Unity 6 for M001 and the
 primary mobile client, with iOS/Android direction. M001 remains local/offline.
-Unity must not own authoritative future economy/inventory state. Exact editor and
-package versions remain setup unknowns; the engine choice requires a new ADR to revisit.
+Unity must not own authoritative future economy/inventory state. The [minimal
+project](../game/DemonCodex.Unity/README.md) pins editor 6000.6.3f1 and bundled Test
+Framework 1.8.0. The engine choice requires a new ADR to revisit.
+
+DC-0004 keeps runtime rules in an assembly with no Unity references; .NET Standard
+2.1 builds link the same C# files. Commands carry revisions; immutable snapshots
+and read-only configuration make rejection nonmutating. RNG and deterministic
+test policy live only in an editor/test simulation assembly. The [evidence record](product/DC_0004_EVIDENCE.md)
+details invariants, API boundaries and test results. No network/save protocol is implied.
 
 ## Identity boundaries
 

@@ -9,8 +9,9 @@ the original DC-0002 request. This task does not implement gameplay or Unity cod
 - [GDD](../GDD.md): accepted mechanics, working terminology, parameterized topology,
   position vocabulary, move generation/resolution, atomic turn transitions,
   21 rule/edge-case rows, 12 invariants and accepted G1–G6 rulings.
-- [Rule-to-test matrix](../../tests/M001_RULE_TEST_MATRIX.md): 25 future cases,
-  each marked NOT RUN; no simulated or gameplay test results are claimed.
+- [Rule-to-test matrix](../../tests/M001_RULE_TEST_MATRIX.md): at DC-0002 review,
+  25 future cases were NOT RUN. The subsequent DC-0004 evidence records execution;
+  no gameplay results were claimed by the rules-only task.
 - Supplied decisions cover four players / four pieces, one human / three bots,
   1d6, entry on 6, six bonuses, exact movement, knockout, safety, friendly
   occupancy, private paths, exact finish, no-move resolution, victory and restart.
@@ -40,7 +41,8 @@ policy remain explicit UNKNOWNs or separately configurable choices. They do not
 block DC-0002 approval because the rules core remains parameterized. No defaults,
 draw outcome or gameplay implementation are introduced; simulation timeouts must
 be reported. Artwork and external seed policy remain outside this specification.
-DC-0002 is DONE; DC-0004 remains BACKLOG and unstarted, requiring separate authorization.
+DC-0002 is DONE. At rules approval DC-0004 was unstarted; the subsequent explicit
+implementation request is tracked in [DC-0004 evidence](DC_0004_EVIDENCE.md).
 
 ## Validation
 
@@ -63,5 +65,5 @@ Manual coverage review maps every supplied decision to the specification:
 
 No Unity/gameplay files, actual board dimensions, assets or new dependencies are
 introduced. DC-0001 is marked DONE solely because the owner explicitly approved
-foundation; DC-0003 stays DONE and DC-0004 stays BACKLOG. DC-0002 is DONE based on
+foundation; DC-0003 stays DONE. DC-0004 status is tracked in the backlog. DC-0002 is DONE based on
 documented evidence and explicit human approval, not on unrun gameplay tests.

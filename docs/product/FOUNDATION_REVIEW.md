@@ -30,8 +30,10 @@ Full JSON Schema instance validation is not claimed by this lightweight checker.
 
 ## Limitations and open gates
 
-No gameplay tests, playable build, performance baseline, economy balance, legal
-determination or secret-store security validation exists. Foundation and engine selection are approved.
+At foundation review, no gameplay tests, playable build, performance baseline,
+economy balance, legal determination or secret-store validation existed. Foundation
+and engine selection are approved.
 The [DC-0002 specification](DC_0002_REVIEW.md) is now human-approved, including
-G1–G6. DC-0004 remains unstarted and requires separate task authorization. CI execution is separate evidence
+G1–G6. The subsequent separately authorized DC-0004 implementation is recorded in
+[its evidence](DC_0004_EVIDENCE.md); foundation-only observations above are historical. CI execution is separate evidence
 from the local check and should be inspected on the PR.

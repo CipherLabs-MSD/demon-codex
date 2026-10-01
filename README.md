@@ -1,7 +1,8 @@
 # Demon Codex
 
 Dark-fantasy, play-to-collect game and IP built around **666 canonical demons**.
-Foundation v0.1 establishes the project control center. No game is implemented yet.
+Foundation v0.1 established the project control center. DC-0004 adds a deterministic
+C# rules core with executable tests; no playable client or UI exists yet.
 
 ## Start here
 
@@ -25,10 +26,20 @@ Foundation v0.1 establishes the project control center. No game is implemented y
 Clone the repository and install Python 3.11 or newer for foundation checks only.
 Run `python tools/check_foundation.py` from the repository root.
 The check needs no third-party packages. CI runs the same command.
-There is no game build, engine dependency, backend, or deployment procedure yet.
 
-`game/`, `backend/`, `assets/`, and `blockchain/` contain scope notes only.
-`content/` contains a proposed data contract, not approved demon records.
-`tests/` describes the future evidence strategy. Begin implementation only in a
-separately authorized task after the M001 rules are reviewed. Unity 6 is the accepted engine for M001 and
-the primary mobile client; see [ADR 0002](docs/adr/0002-unity-6-engine.md).
+For the rules core install .NET SDK 8.0.425 and run:
+
+```text
+dotnet test tests/DemonCodex.Rules.Tests/DemonCodex.Rules.Tests.csproj -c Release
+dotnet run --project tools/DemonCodex.Simulation.Cli -c Release -- 1000 1 artifacts/simulation 10000
+```
+
+[Game structure](game/README.md) and [DC-0004 evidence](docs/product/DC_0004_EVIDENCE.md)
+explain the shared C# sources, synthetic fixtures and actual test results.
+The [Unity scaffold](game/DemonCodex.Unity/README.md) pins Unity 6000.6.3f1.
+Unity 6000.6.3f1 EditMode validation passed all 48 tests. DC-0004 is human-approved
+DONE; mobile/IL2CPP builds remain unverified.
+
+`backend/`, `assets/` and `blockchain/` contain scope notes only. `content/` remains a
+proposed authoring contract. No production backend or deployment exists. DC-0005
+and a playable client require separate authorization; see [M001](docs/product/MILESTONES.md).

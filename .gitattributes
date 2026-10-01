@@ -1,0 +1,2 @@
+# Keep deterministic simulation evidence byte-comparable on Windows and CI.
+tests/evidence/dc-0004/*.csv text eol=lf
