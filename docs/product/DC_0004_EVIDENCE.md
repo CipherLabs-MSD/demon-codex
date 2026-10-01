@@ -1,6 +1,7 @@
 # DC-0004 — Deterministic rules core evidence
 
-Status: REVIEW / TEST, subject to human review; never self-declared DONE.
+Status: DONE — explicitly approved by the human product owner on 2026-10-01
+after successful Unity EditMode validation. DC-0005 remains BACKLOG.
 Scope: first domain implementation, not DC-0005's playable UI or final bot AI.
 Based on approved main `614ba9bbbdf6428d8da80e284aab4ebe4ea480b3` and [GDD](../GDD.md).
 
@@ -82,20 +83,24 @@ noncompletion, never a draw or gameplay win. A separate unit test deliberately
 forces a one-roll watchdog and verifies its classification; it is not one of the
 1,000 production-sized batch results. These samples do not prove all seeds terminate.
 
-## Unity attempt and limitations
+## Successful Unity EditMode validation
 
 Pinned installed editor: **6000.6.3f1 (45d8eee7de74)**. Minimal scene-free scaffold
 under [DemonCodex.Unity](../../game/DemonCodex.Unity/README.md), with bundled Test
 Framework 1.8.0; its package graph is documented there. No extra render/game packages.
 
-Headless EditMode execution was **attempted**, but exited **198** before tests or
-project import completed: access token unavailable and zero matching license
-entitlements. **Unity tests executed: 0.** No EditMode success, Package Manager
-resolution, editor import, IL2CPP or mobile build is claimed. The lock file is based
-on installed built-in manifests, not a successful Unity import. Only Windows player
-support is installed; iOS/Android build modules and build settings remain future work.
-See the [sanitized attempt](../../tests/evidence/dc-0004/unity-attempt.json).
-The owner must activate a suitable license, then rerun the Unity helper below.
+The owner supplied a successful headless EditMode run on **2026-10-01 at 08:43:32 UTC**.
+The result XML was inspected: **48 tests passed, 0 failed, 0 skipped**. The accompanying
+editor log confirms version 6000.6.3f1 (45d8eee7de74) and successful exit code 0.
+Editor import/compilation and execution of the shared test assembly are now verified
+locally. This supersedes the earlier exit-198 license blocker.
+
+Raw result: `artifacts/unity/e668cc08def3423e852dd4dab9cfe5e8/results.xml`.
+[Sanitized Unity evidence](../../tests/evidence/dc-0004/unity-attempt.json) records
+all 48 test outcomes, source path/hash, timestamps and PASSED status. Raw artifacts
+remain local/ignored. Generated local project settings are preserved but not included
+in this documentation-only update. No IL2CPP, iOS or Android build is claimed;
+mobile build modules/settings remain future work.
 
 ## Reproduce validation
 
@@ -124,14 +129,14 @@ the actual workflow result on its current commit.
 
 Local foundation/link validation passed (36 required files, 38 Markdown documents,
 35 tasks); whitespace validation passed. Generated caches are excluded from the
-documentation scan. This does not certify a Unity import.
+documentation scan. Unity validation is evidenced separately by the successful run above.
 
 ## Open issues and review boundary
 
-Unity import/tests are blocked by local licensing; mobile builds are unverified.
+Unity EditMode validation is complete; mobile and IL2CPP builds remain unverified.
 Board dimensions, starts, additional safe indices, path lengths, first-player
 policy, final bot strategy and draw/stalemate policy remain unresolved outside
 the parameterized core. No visual board, UI, abilities, backend or economy exists.
-DC-0004 can enter REVIEW / TEST with executed headless evidence and an explicit
-Unity limitation, as allowed by the task. Human review decides DONE; DC-0005 stays
-BACKLOG and unstarted.
+The human owner explicitly approved DC-0004 as DONE based on implementation,
+headless tests/simulation and successful Unity validation. DC-0005 remains BACKLOG
+and unstarted; this approval does not authorize its implementation.

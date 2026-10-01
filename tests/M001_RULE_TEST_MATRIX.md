@@ -4,8 +4,9 @@ WORKING DECISION: this matrix now maps to executable NUnit tests in
 [RulesTests.cs](../game/DemonCodex.Unity/Assets/DemonCodex/Tests/EditMode/RulesTests.cs).
 Source of truth: [GDD](../docs/GDD.md). T01–T25 passed in the .NET run (48 total
 cases including parameterizations and extra diagnostics); see [actual results](evidence/dc-0004/unit-tests.json).
-Unity EditMode tests were authored but **NOT EXECUTED** because the editor exited
-198 for missing license entitlement. [Evidence](../docs/product/DC_0004_EVIDENCE.md) distinguishes both runners. The product owner explicitly approved G1–G6;
+Unity 6000.6.3f1 EditMode also executed all **48 cases: 48 passed, 0 failed, 0 skipped**,
+verified from the supplied 2026-10-01 result XML. See [Unity results](evidence/dc-0004/unity-attempt.json)
+and [evidence](../docs/product/DC_0004_EVIDENCE.md) for both runners. The product owner explicitly approved G1–G6;
 all corresponding expected outcomes are unconditional M001 requirements. Test IDs are stable; add cases without renumbering.
 
 Use synthetic validated L/F/start/safety/order fixtures with labeled test-only

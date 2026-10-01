@@ -20,11 +20,13 @@ reapplying identical input to compare ordered events and state. Failed actions a
 checked for unchanged snapshots. On simulation failure/watchdog, full traces are
 saved alongside the per-seed CSV. A watchdog does not create a gameplay draw.
 
-Unity EditMode execution was attempted but blocked before import by missing license
-entitlement (exit 198). Activate a license then use
-[the Unity helper](../tools/run_unity_tests.ps1). No Unity or mobile pass is claimed.
+Unity 6000.6.3f1 EditMode validation is complete: **48 passed, 0 failed, 0 skipped**
+on 2026-10-01; [verified results](evidence/dc-0004/unity-attempt.json) supersede the
+earlier license blocker. Use [the Unity helper](../tools/run_unity_tests.ps1) to
+reproduce. No mobile or IL2CPP build pass is claimed.
 
 Foundation checks cover documentation links and required files, task references,
 schema boundaries and milestone exclusions. Generated Unity/.NET directories are
 excluded from documentation traversal. They do not replace narrative review.
-M001 still needs a playable UI, clean Unity setup validation and human playtest.
+M001 still needs a playable UI and human playtest. DC-0004 is human-approved DONE;
+DC-0005 remains BACKLOG.

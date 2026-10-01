@@ -10,7 +10,7 @@ not a deployed service topology. See [ADR 0001](adr/0001-foundation-boundaries.m
 | backend | Future accounts, inventory authority and online systems | Deferred |
 | assets | Reviewed art/audio with rights metadata | Empty of media |
 | blockchain | Optional exceptional provenance adapter | Deferred; no code |
-| tools/tests | NUnit, deterministic simulation and foundation/link checks | Executed headless evidence; Unity attempt blocked by licensing |
+| tools/tests | NUnit, deterministic simulation and foundation/link checks | 48 .NET and 48 Unity EditMode tests passed; 1000 simulated matches completed |
 
 WORKING DECISION: the [DC-0002 rules specification](GDD.md) defines a deterministic
 local rules core, explicit state transitions and externally supplied die results.

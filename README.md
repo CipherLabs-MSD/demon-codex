@@ -37,8 +37,8 @@ dotnet run --project tools/DemonCodex.Simulation.Cli -c Release -- 1000 1 artifa
 [Game structure](game/README.md) and [DC-0004 evidence](docs/product/DC_0004_EVIDENCE.md)
 explain the shared C# sources, synthetic fixtures and actual test results.
 The [Unity scaffold](game/DemonCodex.Unity/README.md) pins Unity 6000.6.3f1.
-Unity import/EditMode tests are currently blocked by missing local license entitlement;
-headless .NET results do not certify editor or mobile builds.
+Unity 6000.6.3f1 EditMode validation passed all 48 tests. DC-0004 is human-approved
+DONE; mobile/IL2CPP builds remain unverified.
 
 `backend/`, `assets/` and `blockchain/` contain scope notes only. `content/` remains a
 proposed authoring contract. No production backend or deployment exists. DC-0005

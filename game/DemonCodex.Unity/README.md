@@ -11,7 +11,8 @@ There are no scenes in the build list. Do not add UI or artwork as part of DC-00
 - `Assets/DemonCodex/Tests/Simulation`: editor-only synthetic harness; owns seeded
   RNG and test move selection. Not included in a mobile player build.
 - `ProjectSettings`: exact editor version and empty build list. Other settings
-  will be generated/reviewed on the first licensed import; rendering is undecided.
+  were generated locally during licensed import; these untracked settings are not
+  part of the evidence-only update. Rendering is undecided.
 - `Packages`: only Test Framework is directly requested; no render, network or
   gameplay packages. Stable `.meta` GUIDs are committed beside assets/folders.
 
@@ -33,10 +34,10 @@ Unity 6000.6.3f1 ships these built-in packages, pinned from their installed mani
 | com.unity.modules.imgui | 1.0.0 | Runner dependency |
 | com.unity.modules.jsonserialize | 1.0.0 | Runner dependency |
 
-The lock file reflects the bundled package dependency graph, not a successful
-Package Manager resolution. The first import has **not** been verified: the local
-headless attempt exited 198 without an active license, before running tests.
-Do not describe headless .NET success as Unity/IL2CPP or mobile validation.
+The lock file reflects the bundled package dependency graph. A successful local
+Unity 6000.6.3f1 import/compilation and EditMode run on 2026-10-01 now verifies
+**48 tests passed, 0 failed, 0 skipped**. This supersedes the earlier license-blocked
+attempt. Mobile and IL2CPP builds remain unverified.
 
 ## Reproduce Unity validation
 
@@ -48,8 +49,8 @@ flow, then run from the repository root in PowerShell:
 ```
 
 The helper runs hidden batch mode, waits for exit and checks a fresh NUnit result
-file. It does not acquire a license or install an editor. Until a successful run,
-Unity tests are authored but NOT EXECUTED. See [implementation evidence](../../docs/product/DC_0004_EVIDENCE.md).
+file. It does not acquire a license or install an editor. The successful run is
+recorded with all 48 outcomes and the raw XML hash. See [implementation evidence](../../docs/product/DC_0004_EVIDENCE.md).
 
 References: [editor release](https://unity.com/releases/editor/whats-new/6000.6.3f1)
 and [Unity test command-line reference](https://docs.unity.com/en-us/engine/6000.6/manual/scripting/test-framework-introduction/reference-command-line).
