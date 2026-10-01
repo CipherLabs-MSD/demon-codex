@@ -14,6 +14,45 @@ namespace DemonCodex.PlayTests
 {
     public class LocalMatchPlayTests
     {
+#if UNITY_EDITOR
+        [UnityTest]
+        public IEnumerator DevelopmentScenariosUseNormalSelectionAndRestartRestoresNormalPlay()
+        {
+            yield return SceneManager.LoadSceneAsync("LocalMatch");
+            var c = UnityEngine.Object.FindFirstObjectByType<LocalMatchController>();
+            foreach (DemonCodex.Development.ScenarioKind kind in Enum.GetValues(typeof(DemonCodex.Development.ScenarioKind)))
+            {
+                var scenario = DemonCodex.Development.ScenarioReplay.Prepare(kind);
+                c.LoadDevelopmentSession(scenario.Session, scenario.Instruction);
+                Assert.That(c.DevelopmentScenario, Is.EqualTo(scenario.Instruction));
+                Assert.That(c.enabled, Is.False, "Only scenario bot scheduling is paused.");
+                Assert.That(c.LatestRoll, Is.EqualTo(scenario.IntendedMove.Roll));
+                Assert.That(c.DevelopmentScenarioAwaitingExit, Is.False);
+                Assert.That(c.Select(scenario.IntendedMove), Is.True);
+                Assert.That(c.PresentedState, Is.SameAs(c.Session.State));
+                Assert.That(c.DevelopmentScenarioAwaitingExit, Is.True, "View must offer PLAY AGAIN while bots are paused.");
+                bool captured = false, completed = false, path = false;
+                CheckProjection(c, ref captured, ref completed, ref path);
+                var outcome = c.PresentedState;
+                yield return new WaitForSecondsRealtime(.7f);
+                Assert.That(c.PresentedState, Is.SameAs(outcome), "Outcome stays visible for inspection.");
+                yield return Capture("scenario-" + kind.ToString().ToLowerInvariant());
+                Assert.That(c.PlayAgain(2026), Is.True);
+                Assert.That(c.DevelopmentScenario, Is.Null);
+                Assert.That(c.DevelopmentScenarioAwaitingExit, Is.False);
+                Assert.That(c.enabled, Is.True);
+                Assert.That(c.LatestRoll, Is.Null);
+                Assert.That(c.Session.State.Pieces.All(p => p.Position.Kind == PieceKind.InAbyss), Is.True);
+                Assert.That(c.Session.State.Revision, Is.EqualTo(outcome.Revision + 1));
+                Assert.That(c.Roll(), Is.True);
+                // An ordinary seeded match is active again; no replay/dice override remains.
+                var normal = new LocalMatchSession(2026); normal.Start(); normal.RollHuman();
+                Assert.That(c.Session.State.ActivePlayer, Is.EqualTo(normal.State.ActivePlayer));
+                Assert.That(c.Session.State.PendingRoll, Is.EqualTo(normal.State.PendingRoll));
+                Assert.That(c.Session.State.Phase, Is.EqualTo(normal.State.Phase));
+            }
+        }
+#endif
         private sealed class OneDie : IDieSource { public int Next() => 1; }
         [UnityTest]
         public IEnumerator BotDelayPacesCommandsAndRestartCancelsPendingTurn()

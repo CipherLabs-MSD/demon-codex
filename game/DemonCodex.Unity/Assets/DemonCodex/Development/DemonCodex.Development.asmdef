@@ -1,0 +1,7 @@
+{
+  "name": "DemonCodex.Development",
+  "references": ["DemonCodex.Rules", "DemonCodex.LocalMatch"],
+  "includePlatforms": ["Editor"],
+  "noEngineReferences": true,
+  "autoReferenced": false
+}

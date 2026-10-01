@@ -61,8 +61,17 @@ namespace DemonCodex.Presentation
             float scale = Mathf.Min(Screen.width / 1200f, Screen.height / 850f);
             GUI.matrix = Matrix4x4.TRS(new Vector3((Screen.width - 1200 * scale) / 2, (Screen.height - 850 * scale) / 2), Quaternion.identity, new Vector3(scale, scale, 1));
             Fill(new Rect(0, 0, 1200, 850), new Color(.035f, .043f, .065f));
-            GUI.Label(new Rect(30, 20, 720, 38), "DEMON CODEX  /  LOCAL MATCH", title);
-            GUI.Label(new Rect(32, 62, 740, 25), "M001 prototype  ·  One human + three bots  ·  Clockwise travel", small);
+            string heading = "DEMON CODEX  /  LOCAL MATCH";
+            string subtitle = "M001 prototype  ·  One human + three bots  ·  Clockwise travel";
+#if UNITY_EDITOR
+            if (controller.DevelopmentScenario != null)
+            {
+                heading = "DEVELOPMENT TEST SCENARIO";
+                subtitle = controller.DevelopmentScenario;
+            }
+#endif
+            GUI.Label(new Rect(30, 20, 720, 38), heading, title);
+            GUI.Label(new Rect(32, 62, 740, 25), subtitle, small);
             var session = controller.Session;
             var state = controller.PresentedState;
             for (int i = 0; i < state.Board.MainTrackLength; i++)
@@ -115,6 +124,10 @@ namespace DemonCodex.Presentation
             var session = controller.Session;
             var state = session.State;
             bool seedValid = uint.TryParse(seedText, out uint seed);
+            bool scenarioPaused = false;
+#if UNITY_EDITOR
+            scenarioPaused = controller.DevelopmentScenarioAwaitingExit;
+#endif
             string status = !session.Started ? "Ready to descend?" : state.Winner.HasValue
                 ? LocalMatchController.Name(state.Winner.Value) + " WINS!" : LocalMatchController.Name(state.ActivePlayer) + " turn";
             GUI.Label(new Rect(825, 40, 340, 42), status, title);
@@ -122,9 +135,13 @@ namespace DemonCodex.Presentation
                 ? "All four pieces are home. Play another match." : session.IsHumanTurn
                 ? state.Phase == MatchPhase.AwaitingRoll ? "Roll to begin your move." : "Choose a white-bordered piece or a button below."
                 : "Bots are playing automatically...";
+#if UNITY_EDITOR
+            if (scenarioPaused && !state.Winner.HasValue)
+                instruction = "Test result shown; bots are paused. PLAY AGAIN starts a normal match.";
+#endif
             GUI.Label(new Rect(825, 88, 332, 58), instruction, label);
             GUI.Label(new Rect(825, 152, 332, 36), "DIE  " + (controller.LatestRoll?.ToString() ?? "—"), title);
-            if (!session.Started || state.Winner.HasValue)
+            if (!session.Started || state.Winner.HasValue || scenarioPaused)
             {
                 GUI.Label(new Rect(825, 200, 68, 28), "Seed", label);
                 seedText = GUI.TextField(new Rect(895, 200, 257, 30), seedText, 10);

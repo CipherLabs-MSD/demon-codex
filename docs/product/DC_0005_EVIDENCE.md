@@ -23,6 +23,49 @@ The scene is the first enabled build scene. No packaged binary is claimed.
 Desktop Editor input is the acceptance target; iOS/Android builds, touch
 ergonomics and IL2CPP remain unverified.
 
+## Owner playtest record — PARTIAL
+
+Owner report, 2026-10-01, Unity 6000.6.3f1, normal START MATCH flow:
+
+- The normal Unity prototype launched successfully.
+- The owner started and played a normal match.
+- Rolling, piece movement and automatic bot turns were observed working.
+- The owner paused before the endgame because the manual match took too long.
+
+Endgame human acceptance (knockout, Ascension, completion, victory, PLAY AGAIN
+and a second match) remains **PENDING**. The development scenarios below were
+added only to make that remaining acceptance fast.
+
+## Development test scenarios (Editor only)
+
+Menu `Demon Codex > Development Playtest Scenarios` offers TEST KNOCKOUT,
+TEST ASCENSION, TEST COMPLETION and TEST VICTORY during Play Mode.
+[ScenarioReplay](../../game/DemonCodex.Unity/Assets/DemonCodex/Development/ScenarioReplay.cs)
+replays ordinary seeded sessions through the normal session API, checking
+invariants after every transition. It stops at the first human selection where a
+reducer-supplied legal move would produce the outcome; the preview is a pure
+`RulesEngine.Apply` on the immutable state. No snapshots, rule overrides or special
+dice are fabricated. The owner's click then submits the normal `SelectMove`
+command, so the knockout, Ascension, completion and victory transitions and events
+come from the DC-0004 reducer, not the presentation layer.
+
+| Button | Source seed / revision | Die | Click | Reducer result |
+| --- | --- | --- | --- | --- |
+| TEST KNOCKOUT | 1 / 193 | 4 | Piece 3, square 9 → 13 | Bot II piece 2 banished to its Abyss |
+| TEST ASCENSION | 1 / 154 | 5 | Piece 2, square 35 → path 1 | Piece enters the blue Ascension Path |
+| TEST COMPLETION | 1 / 269 | 1 | Piece 2, path 5 → home | Piece completes; no winner |
+| TEST VICTORY | 3 / 546 | 3 | Piece 4, path 3 → home | Fourth piece home; Human wins |
+
+Isolation: the `DemonCodex.Development` assembly is Editor-only and not
+auto-referenced; controller/view hooks are `#if UNITY_EDITOR`, so player builds
+contain none of it (verified by a Windows player build, below). START MATCH never calls the replay. While a scenario is
+loaded the title reads `DEVELOPMENT TEST SCENARIO` and bot scheduling is paused
+so the result stays visible. After the scenario move, the panel shows the normal
+seed field and PLAY AGAIN (inherited code showed it only after a win; fixed here).
+PLAY AGAIN issues the domain Restart command, clears scenario mode and resumes
+bots: an ordinary seeded match follows. Automated scenario tests are **not**
+human acceptance.
+
 ## M001 PROTOTYPE CONFIGURATION
 
 These are explicit, revisable DC-0005 choices, **not permanent canon**. The rules
@@ -71,60 +114,84 @@ legal-selection borders distinguish states. No commercial layout or assets copie
 
 ## Validation
 
-Actually executed on 2026-10-01:
+Actually executed on 2026-10-01, after the development-scenario work (supersedes
+the earlier 57 EditMode / 2 PlayMode run):
 
 | Check | Result |
 | --- | --- |
-| Existing .NET rules tests | 48 passed, 0 failed |
-| New shared .NET session tests | 9 passed, 0 failed |
+| Existing .NET rules tests (SDK 8.0.425) | 48 passed, 0 failed |
+| Shared .NET session + scenario tests | 14 passed (9 session + 5 scenario), 0 failed |
 | Existing deterministic simulation | 1000/1000 complete; 0 invariant failures, 0 watchdogs; CSV identical to baseline |
-| Unity 6000.6.3f1 EditMode | 57 passed (48 original + 9 session), 0 failed |
-| Unity 6000.6.3f1 PlayMode | 2 passed, 0 failed; real scene, two complete matches plus timing/restart test |
+| Unity 6000.6.3f1 EditMode | 62 passed (48 rules + 9 session + 5 scenario), 0 failed |
+| Unity 6000.6.3f1 PlayMode (batch) | 3 passed, 0 failed |
+| Unity 6000.6.3f1 PlayMode (rendered, screenshots) | 3 passed, 0 failed; 8 images |
+| Throwaway Windows x64 player build (isolation check) | Success; only Rules, LocalMatch and Presentation assemblies; no scenario code or text in the player |
+| `python tools/check_foundation.py` (local Python 3.10.6) | PASS, including local links |
+| `git diff --check` | clean |
 
+The owner's Editor had the project open, so Unity ran on a clean scratch copy of
+the exact committed file set (tracked files, new scenario files and their
+Editor-generated `.meta` files; untracked local ProjectSettings excluded).
 [Machine-readable evidence](../../tests/evidence/dc-0005/validation.json) records
-individual Unity outcomes, raw XML paths/hashes and simulation totals. Raw local
-logs/XML stay in ignored artifacts; the committed summary omits machine identity.
-An initial screenshot-enabled batch run failed because the Game view did not
-repaint. The corrected helper's rendered run passed and produced all four images.
+individual Unity outcomes, raw XML paths/hashes, scenario data and simulation
+totals. Raw local logs/XML stay in ignored artifacts; the committed summary omits
+machine identity. Unity reports CS0618 deprecation warnings for
+`FindFirstObjectByType` (pre-existing in PlayMode tests, repeated in the new
+window); they are not errors. The player build only verifies compilation and
+isolation; it is not a distributed or tested binary.
 
-Rendered screenshots were inspected; an Abyss/track overlap was corrected before
-the final capture. These do not replace owner visual acceptance. The local Editor
-Game view was unusually wide, so the proportional layout is letterboxed.
+Rendered screenshots were inspected. The four normal-match images regenerated
+byte-identical to the earlier commit, so normal presentation is unchanged. Each
+scenario image shows the banner, the reducer result and the PLAY AGAIN exit.
+These do not replace owner visual acceptance. The local Editor Game view was
+unusually wide, so the proportional layout is letterboxed.
 
 - [Initial board](../../tests/evidence/dc-0005/01-initial.png)
 - [Human legal selection](../../tests/evidence/dc-0005/02-selection.png)
 - [Active match](../../tests/evidence/dc-0005/03-active.png)
 - [Victory](../../tests/evidence/dc-0005/04-victory.png)
-
-Foundation/link/whitespace checks and GitHub CI are verified before final delivery.
+- Scenario results: [knockout](../../tests/evidence/dc-0005/05-scenario-knockout.png),
+  [Ascension](../../tests/evidence/dc-0005/05-scenario-ascension.png),
+  [completion](../../tests/evidence/dc-0005/05-scenario-completion.png),
+  [victory](../../tests/evidence/dc-0005/05-scenario-victory.png)
 
 Authored tests cover session start, roll equivalence with the reducer, exact legal
 selectable sets, stale selection, six bonuses, no-move turns, bot ranking,
 reproducible complete matches, terminal locking and restart. PlayMode loads the
 committed scene and exercises real Update-driven bots, two complete matches,
 knockout/completion position projection, pacing and pending-turn cancellation.
+Scenario tests check each replay reaches a legal human selection through real
+commands, the intended move is selectable, invariants hold, the reducer produces
+the outcome, replays are reproducible and preparing one leaves normal seeded play
+unchanged. The PlayMode scenario test loads each into the real scene, checks bots
+stay paused, the PLAY AGAIN exit is offered, and Restart resumes an ordinary match.
 
 Automated human actions call the controller API. They are **not** evidence of
 owner clicks or accepted readability/game feel. Complete the checklist before DONE.
 
-## Human acceptance checklist — NOT YET EXECUTED
+## Human acceptance checklist — PARTIAL
 
-Record Unity version, seed, date, reviewer, pass/fail and notes for each item.
+Record date, reviewer, pass/fail and notes. "Observed" items come from the owner's
+2026-10-01 report; everything else is still open.
 
-- [ ] Project opens without compilation errors.
-- [ ] LocalMatch enters Play Mode and shows all 16 pieces.
-- [ ] START MATCH and human ROLL work through actual controls.
-- [ ] Only legal pieces are selectable; board and side buttons work.
-- [ ] Three bots play automatically and yield turns or win.
-- [ ] Six bonus and no-move feedback are understandable.
-- [ ] Knockout visibly returns the opponent to its Abyss.
-- [ ] A piece visibly enters its owner's Ascension Path.
-- [ ] Exact completion visibly moves a piece home.
-- [ ] Full match reaches a clear winner and gameplay stops.
-- [ ] PLAY AGAIN clears die/log, resets pieces and restores the human turn.
-- [ ] A second match begins and can be played to completion.
-- [ ] Colors, safe markers, text and legal choices are readable.
-- [ ] Owner explicitly approves DC-0005 DONE or supplies corrections.
+| Item | Status | Fast path |
+| --- | --- | --- |
+| Project opens without compilation errors | Observed | — |
+| START MATCH and human ROLL work through actual controls | Observed | — |
+| Pieces move and three bots take turns automatically | Observed | — |
+| Only legal pieces are selectable; board and side buttons work | PENDING | Any scenario |
+| Knockout visibly returns the opponent to its Abyss | PENDING | TEST KNOCKOUT |
+| A piece visibly enters its owner's Ascension Path | PENDING | TEST ASCENSION |
+| Exact completion visibly moves a piece home | PENDING | TEST COMPLETION |
+| Match reaches a clear winner and gameplay stops | PENDING | TEST VICTORY |
+| PLAY AGAIN clears die/log, resets pieces and restores the human turn | PENDING | After any scenario |
+| A second match begins and bots resume | PENDING | After PLAY AGAIN |
+| Six bonus and no-move feedback are understandable | PENDING | Normal match, if seen |
+| Colors, safe markers, text and legal choices are readable | PENDING | Throughout |
+| Owner explicitly approves DC-0005 DONE or supplies corrections | PENDING | — |
+
+Playing a second match all the way to victory is covered by automated PlayMode
+evidence only; the owner decides whether "second match begins" is sufficient.
 
 ## Open limits
 
@@ -132,4 +199,5 @@ Permanent dimensions, production first-player policy and final bot strategy rema
 design choices. Stalemate/draw policy remains UNKNOWN; no timeout win or gameplay
 cap is added. Test bounds are watchdogs only. No save/resume, animation, sound,
 polished art, mobile validation, advanced AI, collection, backend, inventory,
-economy or online systems are included. DC-0006 is not started.
+economy or online systems are included. Development scenarios are an Editor
+acceptance aid, not a gameplay feature or save system. DC-0006 is not started.

@@ -16,9 +16,39 @@ namespace DemonCodex.Presentation
         private readonly List<string> log = new List<string>();
         private float nextBotAt;
 
+#if UNITY_EDITOR
+        // Editor tooling only: absent from every player build, including development builds.
+        public string DevelopmentScenario { get; private set; }
+        // Bots stay paused after the scenario move, so the view offers the normal PLAY AGAIN exit.
+        public bool DevelopmentScenarioAwaitingExit => DevelopmentScenario != null && !Session.IsHumanTurn;
+        public void LoadDevelopmentSession(LocalMatchSession session, string instruction)
+        {
+            Invariants.AssertState(session.State);
+            if (!session.IsHumanTurn || session.State.Phase != MatchPhase.AwaitingSelection)
+                throw new System.ArgumentException("Scenario must stop at a legal human selection.");
+            Session.Transitioned -= Present;
+            Session = session;
+            Session.Transitioned += Present;
+            PresentedState = Session.State;
+            LatestRoll = Session.State.PendingRoll;
+            LastEvents = new DomainEvent[0]; log.Clear();
+            DevelopmentScenario = instruction;
+            // Pause only bot scheduling; UI still uses normal Roll/Select/PlayAgain.
+            enabled = false;
+        }
+        private void ClearDevelopmentScenario()
+        {
+            if (DevelopmentScenario != null) enabled = true;
+            DevelopmentScenario = null;
+        }
+#endif
+
         private void Awake() { Initialize(2026); }
         public void Initialize(uint seed, IDieSource die = null)
         {
+#if UNITY_EDITOR
+            ClearDevelopmentScenario();
+#endif
             if (Session != null) Session.Transitioned -= Present;
             Session = new LocalMatchSession(seed, die);
             Session.Transitioned += Present;
@@ -39,7 +69,12 @@ namespace DemonCodex.Presentation
             // Consume events in reducer order, then snap visuals to its immutable snapshot.
             foreach (var e in transition.Events)
             {
-                if (e.Kind == EventKind.MatchRestarted) { log.Clear(); LatestRoll = null; }
+                if (e.Kind == EventKind.MatchRestarted) {
+                    log.Clear(); LatestRoll = null;
+#if UNITY_EDITOR
+                    ClearDevelopmentScenario();
+#endif
+                }
                 if (e.Kind == EventKind.DieRolled) LatestRoll = e.Roll;
                 log.Add(Describe(e));
                 if (log.Count > 12) log.RemoveAt(0);

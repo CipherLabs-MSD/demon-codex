@@ -6,12 +6,32 @@
   "runs": {
     "unityEditMode": {
       "result": "Passed",
-      "passed": 57,
+      "passed": 62,
       "failed": 0,
       "skipped": 0,
-      "source": "artifacts/unity/ac48c32e83614317bb91281221b71860/results.xml",
-      "sha256": "852c47f173baaa118cc543bc8507d92ea91f965fd78ef77846aea0a21d6be933",
+      "source": "artifacts/unity/f1a13f5677534ac7b6ed32171272307c/results.xml",
+      "sha256": "5fbb2202b9d351b78ab71a5faeed4775ce7dc967d3a894353df1ab09aab11f16",
       "cases": [
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.PreparingScenariosDoesNotChangeNormalStartOrSeededPlay",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Ascension)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Completion)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Knockout)",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.LocalMatchTests.ScenarioTests.ReplayProducesValidLegalHumanOutcome(Victory)",
+          "result": "Passed"
+        },
         {
           "name": "DemonCodex.LocalMatchTests.SessionTests.CompleteMatchesAreLegalReproducibleAndRestartable(1)",
           "result": "Passed"
@@ -244,14 +264,40 @@
     },
     "unityPlayMode": {
       "result": "Passed",
-      "passed": 2,
+      "passed": 3,
       "failed": 0,
       "skipped": 0,
-      "source": "artifacts/unity/0ace5f6ef4f24e82a6dd2d56c5a78fa2/results.xml",
-      "sha256": "7865f89a777fdd1dcc6ca813a41b682f930fded78a4ea1983a854a7af35867c4",
+      "source": "artifacts/unity/581e3c0583fe46b4a09cc71a01d63764/results.xml",
+      "sha256": "92753e8da244141144be70ac3b900966b17828213b5703efa5b1a9a043a7d77f",
       "cases": [
         {
           "name": "DemonCodex.PlayTests.LocalMatchPlayTests.BotDelayPacesCommandsAndRestartCancelsPendingTurn",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.DevelopmentScenariosUseNormalSelectionAndRestartRestoresNormalPlay",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.ScenePlaysTwoMatchesAndPresentationFollowsDomainEvents",
+          "result": "Passed"
+        }
+      ]
+    },
+    "unityPlayModeScreenshots": {
+      "result": "Passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "source": "artifacts/unity/e0d185bdd1ae47f389e590a4cdeb43f6/results.xml",
+      "sha256": "a08561593549fa5e5415ff07f5c3d6311151a8e65d78cbd2fda433eb02d4e1b4",
+      "cases": [
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.BotDelayPacesCommandsAndRestartCancelsPendingTurn",
+          "result": "Passed"
+        },
+        {
+          "name": "DemonCodex.PlayTests.LocalMatchPlayTests.DevelopmentScenariosUseNormalSelectionAndRestartRestoresNormalPlay",
           "result": "Passed"
         },
         {
@@ -262,13 +308,16 @@
     }
   },
   "dotnet": {
+    "sdk": "8.0.425",
     "rules": {
       "passed": 48,
       "failed": 0
     },
     "localMatch": {
-      "passed": 9,
-      "failed": 0
+      "passed": 14,
+      "failed": 0,
+      "session": 9,
+      "scenario": 5
     }
   },
   "simulation": {
@@ -305,6 +354,99 @@
     {
       "path": "tests/evidence/dc-0005/04-victory.png",
       "sha256": "d73483b6679fa1fe3f3e7e7b1de51f8c15b4dcc1cdc1269877c9a51343bf3265"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-knockout.png",
+      "sha256": "c74d9811fb245ad45698ca59a1af322ebbf7a84df316e6ab7df3db2154b4ea4b"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-ascension.png",
+      "sha256": "2e38655cc25977a306de64de6a81c59ace34882fee4cc6026b573c61f2c7df5e"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-completion.png",
+      "sha256": "c7b8d98a6a1d9f19f56c86c136a518c85ff6dfb7f3acccab0a5aee21e27bd288"
+    },
+    {
+      "path": "tests/evidence/dc-0005/05-scenario-victory.png",
+      "sha256": "94f3d47321563aaefc1af40e0ba5dd721921eebc80dc1e34f8dd8b33d05f24dd"
     }
-  ]
+  ],
+  "ownerPlaytest": {
+    "date": "2026-10-01",
+    "source": "owner report",
+    "observed": [
+      "Unity prototype launched",
+      "normal match started",
+      "rolling, movement and bot turns worked"
+    ],
+    "notReached": "endgame; owner paused because the manual match took too long",
+    "endgameAcceptance": "PENDING"
+  },
+  "unityRunLocation": "clean scratch copy of the exact commit file set (tracked files plus new scenario files and their Editor-generated .meta files; untracked local ProjectSettings excluded), because the owner Editor had the project open; raw results copied to ignored artifacts/",
+  "scenarios": [
+    {
+      "name": "TEST KNOCKOUT",
+      "seed": 1,
+      "revision": 193,
+      "die": 4,
+      "click": "Piece 3",
+      "move": "track square 9 -> 13",
+      "events": [
+        "PieceBanished Bot II #2",
+        "PieceMoved Human #3",
+        "TurnAdvanced Bot I"
+      ]
+    },
+    {
+      "name": "TEST ASCENSION",
+      "seed": 1,
+      "revision": 154,
+      "die": 5,
+      "click": "Piece 2",
+      "move": "track square 35 -> Ascension Path 1",
+      "events": [
+        "PieceMoved Human #2",
+        "TurnAdvanced Bot I"
+      ]
+    },
+    {
+      "name": "TEST COMPLETION",
+      "seed": 1,
+      "revision": 269,
+      "die": 1,
+      "click": "Piece 2",
+      "move": "Ascension Path 5 -> home",
+      "events": [
+        "PieceMoved Human #2",
+        "PieceCompleted Human #2",
+        "TurnAdvanced Bot I"
+      ]
+    },
+    {
+      "name": "TEST VICTORY",
+      "seed": 3,
+      "revision": 546,
+      "die": 3,
+      "click": "Piece 4",
+      "move": "Ascension Path 3 -> home (3 already home)",
+      "events": [
+        "PieceMoved Human #4",
+        "PieceCompleted Human #4",
+        "MatchWon Human"
+      ]
+    }
+  ],
+  "normalScreenshotsRegeneratedIdentical": true,
+  "playerBuild": {
+    "target": "Windows x64 (Mono), throwaway compile/isolation check, not a shipped binary",
+    "result": "Build Finished, Result: Success",
+    "managedDemonCodexAssemblies": [
+      "DemonCodex.LocalMatch.dll",
+      "DemonCodex.Presentation.dll",
+      "DemonCodex.Rules.dll"
+    ],
+    "scenarioSymbolsInPlayerPresentationDll": "absent",
+    "log": "artifacts/unity/player-build/build.log"
+  }
 }

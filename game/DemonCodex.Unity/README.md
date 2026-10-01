@@ -17,7 +17,11 @@ primitives are placeholders; mobile/device acceptance remains pending.
 - `Assets/DemonCodex/Presentation`: timing, event feedback, layout and IMGUI;
   no duplicate move rules.
 - `Assets/DemonCodex/Scenes/LocalMatch.unity`: playable scene, enabled in build list.
-- `Assets/DemonCodex/Editor`: optional scene regeneration menu; not needed to play.
+- `Assets/DemonCodex/Editor`: optional scene regeneration menu and the
+  `Demon Codex > Development Playtest Scenarios` window; not needed to play.
+- `Assets/DemonCodex/Development`: Editor-only scenario replay for fast owner
+  endgame checks. It replays ordinary seeded sessions through normal commands and
+  is absent from player builds; START MATCH never uses it.
 - `Assets/DemonCodex/Tests`: rules/simulation, session and PlayMode tests, excluded
   from normal player builds.
 - `ProjectSettings`: editor version, build list and player settings tracked.
