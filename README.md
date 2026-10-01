@@ -2,8 +2,8 @@
 
 Dark-fantasy, play-to-collect game and IP built around **666 canonical demons**.
 Foundation v0.1 established the project control center. DC-0004 adds a deterministic
-C# rules core with executable tests. DC-0005 adds a local Unity match prototype
-awaiting human playtest acceptance.
+C# rules core with executable tests. DC-0005 adds a local Unity match prototype,
+human-accepted DONE.
 
 ## Start here
 

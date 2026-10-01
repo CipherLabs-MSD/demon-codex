@@ -6,7 +6,7 @@ and press START MATCH. Landscape 1200 × 850 is the reference layout. P0 is huma
 ROLL, then click a highlighted piece or its button. Three bots act automatically.
 The winner gets PLAY AGAIN, using the domain Restart command.
 
-See [DC-0005 evidence and human checklist](../../docs/product/DC_0005_EVIDENCE.md)
+See [DC-0005 evidence and owner acceptance](../../docs/product/DC_0005_EVIDENCE.md)
 for configuration, controls, bot policy and actual validation. Simple IMGUI
 primitives are placeholders; mobile/device acceptance remains pending.
 

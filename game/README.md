@@ -15,4 +15,4 @@ Board values remain validated configuration, not production defaults. Test-only
 RNG and selection policy live outside the domain and are excluded from player builds.
 DC-0005 adds a prototype board, session RNG, deterministic simple bots and UI;
 see [play instructions and evidence](../docs/product/DC_0005_EVIDENCE.md).
-DC-0004 is human-approved DONE; DC-0005 awaits human playtest acceptance. No backend/economy authority belongs here.
+DC-0004 is human-approved DONE; DC-0005 is human-accepted DONE. No backend/economy authority belongs here.

@@ -243,8 +243,8 @@ remaining configuration/design choices do not block its approval. They require
 separate explicit decisions and must not become implicit defaults. DC-0004 remains
 a separate task; rules approval alone did not authorize gameplay implementation.
 The subsequent human request authorized DC-0004, whose [implementation evidence](product/DC_0004_EVIDENCE.md)
-now records successful Unity validation and human approval of DONE. The subsequent DC-0005 request authorizes a local playable prototype; its
-[evidence and human checklist](product/DC_0005_EVIDENCE.md) track acceptance.
+now records successful Unity validation and human approval of DONE. The subsequent DC-0005 request authorized a local playable prototype; its
+[evidence](product/DC_0005_EVIDENCE.md) records owner acceptance and DONE.
 See the [rule-to-test matrix](../tests/M001_RULE_TEST_MATRIX.md) and
 [DC-0002 review record](product/DC_0002_REVIEW.md).
 

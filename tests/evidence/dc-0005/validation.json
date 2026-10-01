@@ -2,7 +2,7 @@
   "date": "2026-10-01",
   "editor": "6000.6.3f1",
   "base": "91229d89c9295387d7248b3f70773ec9714ce52f",
-  "humanAcceptance": "PENDING",
+  "humanAcceptance": "PASS",
   "runs": {
     "unityEditMode": {
       "result": "Passed",
@@ -373,15 +373,27 @@
     }
   ],
   "ownerPlaytest": {
+    "reviewer": "product owner",
     "date": "2026-10-01",
     "source": "owner report",
-    "observed": [
-      "Unity prototype launched",
-      "normal match started",
-      "rolling, movement and bot turns worked"
-    ],
-    "notReached": "endgame; owner paused because the manual match took too long",
-    "endgameAcceptance": "PENDING"
+    "commit": "721a35a",
+    "normalPlay": {
+      "result": "PASS",
+      "observed": [
+        "Unity prototype launched",
+        "normal match started",
+        "rolling, movement and bot turns worked"
+      ],
+      "note": "stopped before endgame; manual match took too long"
+    },
+    "endgame": {
+      "A TEST KNOCKOUT": "PASS",
+      "B TEST ASCENSION": "PASS",
+      "C TEST COMPLETION": "PASS",
+      "D TEST VICTORY": "PASS",
+      "E PLAY AGAIN / second normal match starts": "PASS"
+    },
+    "decision": "DC-0005 DONE"
   },
   "unityRunLocation": "clean scratch copy of the exact commit file set (tracked files plus new scenario files and their Editor-generated .meta files; untracked local ProjectSettings excluded), because the owner Editor had the project open; raw results copied to ignored artifacts/",
   "scenarios": [
@@ -448,5 +460,10 @@
     ],
     "scenarioSymbolsInPlayerPresentationDll": "absent",
     "log": "artifacts/unity/player-build/build.log"
-  }
+  },
+  "notAcceptanceRequirements": [
+    "iOS/Android builds",
+    "touch ergonomics",
+    "IL2CPP"
+  ]
 }

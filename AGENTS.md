@@ -1,7 +1,7 @@
 # Agent operating instructions
 
 Build Demon Codex incrementally: a play-to-collect universe with 666 canonical
-demons. A deterministic rules core and local Unity prototype exist; human playtest acceptance is pending.
+demons. A deterministic rules core and a human-accepted local Unity prototype exist.
 Read README, the task, relevant domain docs,
 M001 and accepted ADRs before changing files.
 

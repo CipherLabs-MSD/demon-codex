@@ -31,5 +31,5 @@ excluded from documentation traversal. They do not replace narrative review.
 DC-0005 adds a playable scene, nine shared session tests, five Editor-only
 development-scenario replay tests and three Unity PlayMode tests. Run `dotnet test tests/DemonCodex.LocalMatch.Tests/DemonCodex.LocalMatch.Tests.csproj -c Release`.
 Add `-TestPlatform PlayMode` to the Unity helper for scene/controller validation.
-See [DC-0005 execution evidence and pending human checklist](../docs/product/DC_0005_EVIDENCE.md).
-DC-0004 is DONE; DC-0005 still requires owner playtest approval.
+See [DC-0005 execution evidence and owner acceptance](../docs/product/DC_0005_EVIDENCE.md).
+DC-0004 and DC-0005 are DONE.

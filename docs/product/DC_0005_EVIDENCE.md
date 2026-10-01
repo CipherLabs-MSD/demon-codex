@@ -1,6 +1,7 @@
 # DC-0005 — Local match UI + bots
 
-Status: REVIEW / TEST; owner playtest is required before DONE. DC-0006 remains BACKLOG.
+Status: **DONE** — human acceptance passed on 2026-10-01 (owner checks A–E PASS).
+DC-0006 remains BACKLOG.
 Base: approved main `91229d89c9295387d7248b3f70773ec9714ce52f`.
 This adds the first playable local Unity scene; no approved domain rule changes.
 
@@ -21,20 +22,28 @@ This adds the first playable local Unity scene; no approved domain rule changes.
 
 The scene is the first enabled build scene. No packaged binary is claimed.
 Desktop Editor input is the acceptance target; iOS/Android builds, touch
-ergonomics and IL2CPP remain unverified.
+ergonomics and IL2CPP remain unverified; they are not DC-0005 acceptance
+requirements.
 
-## Owner playtest record — PARTIAL
+## Owner acceptance record — PASS
 
-Owner report, 2026-10-01, Unity 6000.6.3f1, normal START MATCH flow:
+Reviewer: product owner. Unity 6000.6.3f1 Editor, commit `721a35a`.
 
-- The normal Unity prototype launched successfully.
-- The owner started and played a normal match.
-- Rolling, piece movement and automatic bot turns were observed working.
-- The owner paused before the endgame because the manual match took too long.
+1. Normal play (owner report, 2026-10-01): the prototype launched, a normal
+   START MATCH game was played, and rolling, piece movement and automatic bot
+   turns worked. The owner stopped before the endgame because a manual match took
+   too long, so the Editor-only development scenarios below were added.
+2. Endgame acceptance (owner report, 2026-10-01), seed 2026 for PLAY AGAIN:
 
-Endgame human acceptance (knockout, Ascension, completion, victory, PLAY AGAIN
-and a second match) remains **PENDING**. The development scenarios below were
-added only to make that remaining acceptance fast.
+| Check | Owner action | Result |
+| --- | --- | --- |
+| A — TEST KNOCKOUT | Clicked Piece 3 (die 4) | PASS |
+| B — TEST ASCENSION | Clicked Piece 2 (die 5) | PASS |
+| C — TEST COMPLETION | Clicked Piece 2 (die 1) | PASS |
+| D — TEST VICTORY | Clicked Piece 4 (die 3) | PASS |
+| E — PLAY AGAIN; second normal match starts | PLAY AGAIN, then ROLL; bots resumed | PASS |
+
+The owner reported that everything works and asked to close DC-0005 as DONE.
 
 ## Development test scenarios (Editor only)
 
@@ -167,31 +176,28 @@ unchanged. The PlayMode scenario test loads each into the real scene, checks bot
 stay paused, the PLAY AGAIN exit is offered, and Restart resumes an ordinary match.
 
 Automated human actions call the controller API. They are **not** evidence of
-owner clicks or accepted readability/game feel. Complete the checklist before DONE.
+owner clicks or accepted readability/game feel; the owner record above is.
 
-## Human acceptance checklist — PARTIAL
+## Human acceptance checklist — PASS (2026-10-01)
 
-Record date, reviewer, pass/fail and notes. "Observed" items come from the owner's
-2026-10-01 report; everything else is still open.
-
-| Item | Status | Fast path |
+| Item | Result | Source |
 | --- | --- | --- |
-| Project opens without compilation errors | Observed | — |
-| START MATCH and human ROLL work through actual controls | Observed | — |
-| Pieces move and three bots take turns automatically | Observed | — |
-| Only legal pieces are selectable; board and side buttons work | PENDING | Any scenario |
-| Knockout visibly returns the opponent to its Abyss | PENDING | TEST KNOCKOUT |
-| A piece visibly enters its owner's Ascension Path | PENDING | TEST ASCENSION |
-| Exact completion visibly moves a piece home | PENDING | TEST COMPLETION |
-| Match reaches a clear winner and gameplay stops | PENDING | TEST VICTORY |
-| PLAY AGAIN clears die/log, resets pieces and restores the human turn | PENDING | After any scenario |
-| A second match begins and bots resume | PENDING | After PLAY AGAIN |
-| Six bonus and no-move feedback are understandable | PENDING | Normal match, if seen |
-| Colors, safe markers, text and legal choices are readable | PENDING | Throughout |
-| Owner explicitly approves DC-0005 DONE or supplies corrections | PENDING | — |
+| Project opens without compilation errors | PASS | Owner normal-play report |
+| START MATCH and human ROLL work through actual controls | PASS | Owner normal-play report; E |
+| Pieces move and three bots take turns automatically | PASS | Owner normal-play report; E |
+| Owner selects legal pieces through board/side controls | PASS | A–D |
+| Knockout visibly returns the opponent to its Abyss | PASS | A |
+| A piece visibly enters its owner's Ascension Path | PASS | B |
+| Exact completion visibly moves a piece home | PASS | C |
+| Match reaches a clear winner and gameplay stops | PASS | D |
+| PLAY AGAIN clears die/log, resets pieces and restores the human turn | PASS | E |
+| A second match begins and bots resume | PASS | E (first roll shows no-move feedback) |
+| Owner explicitly approves DC-0005 DONE | PASS | Owner, 2026-10-01 |
 
-Playing a second match all the way to victory is covered by automated PlayMode
-evidence only; the owner decides whether "second match begins" is sufficient.
+Not itemized separately by the owner, and accepted within the overall approval:
+six-bonus feedback, rejection of illegal piece clicks, general readability, and
+playing a second match all the way to victory. Automated tests cover the rules
+behind the first, second and fourth.
 
 ## Open limits
 
@@ -200,4 +206,7 @@ design choices. Stalemate/draw policy remains UNKNOWN; no timeout win or gamepla
 cap is added. Test bounds are watchdogs only. No save/resume, animation, sound,
 polished art, mobile validation, advanced AI, collection, backend, inventory,
 economy or online systems are included. Development scenarios are an Editor
-acceptance aid, not a gameplay feature or save system. DC-0006 is not started.
+acceptance aid, not a gameplay feature or save system. iOS/Android builds,
+touch ergonomics and IL2CPP remain unverified and were not DC-0005 acceptance
+requirements. O001 KR evidencing and the M001 continuation decision belong to
+DC-0006, which remains BACKLOG and not started.

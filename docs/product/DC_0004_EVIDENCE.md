@@ -139,5 +139,5 @@ Board dimensions, starts, additional safe indices, path lengths, first-player
 policy, final bot strategy and draw/stalemate policy remain unresolved outside
 the parameterized core. No visual board, UI, abilities, backend or economy exists.
 The human owner explicitly approved DC-0004 as DONE based on implementation,
-headless tests/simulation and successful Unity validation. DC-0005 remains BACKLOG
-and unstarted; this approval does not authorize its implementation.
+headless tests/simulation and successful Unity validation. At that approval DC-0005
+was BACKLOG and unstarted; that approval did not authorize its implementation.
