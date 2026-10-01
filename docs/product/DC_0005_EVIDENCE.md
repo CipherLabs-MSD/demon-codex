@@ -1,7 +1,7 @@
 # DC-0005 — Local match UI + bots
 
 Status: **DONE** — human acceptance passed on 2026-10-01 (owner checks A–E PASS).
-DC-0006 remains BACKLOG.
+M001 validation continues in the [M001 review](M001_REVIEW.md) (DC-0006).
 Base: approved main `91229d89c9295387d7248b3f70773ec9714ce52f`.
 This adds the first playable local Unity scene; no approved domain rule changes.
 
@@ -209,4 +209,4 @@ economy or online systems are included. Development scenarios are an Editor
 acceptance aid, not a gameplay feature or save system. iOS/Android builds,
 touch ergonomics and IL2CPP remain unverified and were not DC-0005 acceptance
 requirements. O001 KR evidencing and the M001 continuation decision belong to
-DC-0006, which remains BACKLOG and not started.
+DC-0006; see the [M001 review](M001_REVIEW.md).

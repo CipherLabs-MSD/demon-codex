@@ -1,0 +1,274 @@
+{
+  "configuration": "M001 PROTOTYPE CONFIGURATION (PrototypeBoard): L=40, starts 0/10/20/30, safe every 5, F=6, P0 human seat",
+  "policy": "BotPolicy for all four seats; P0 is a proxy for human choices",
+  "rng": "SeededSessionDie (xorshift32, rejection-sampled 1d6), same as the Unity prototype",
+  "matches": 1000,
+  "firstSeed": 1,
+  "lastSeed": 1000,
+  "maxRolls": 10000,
+  "completed": 1000,
+  "invariantFailures": 0,
+  "failureSeeds": [],
+  "watchdogCases": 0,
+  "watchdogSeeds": [],
+  "winsBySeat": {
+    "P0": 254,
+    "P1": 258,
+    "P2": 247,
+    "P3": 241
+  },
+  "perMatch": {
+    "rolls": {
+      "mean": 316.22,
+      "p10": 239,
+      "median": 316,
+      "p90": 392,
+      "min": 176,
+      "max": 546
+    },
+    "turns": {
+      "mean": 263.77,
+      "p10": 200,
+      "median": 263,
+      "p90": 329,
+      "min": 140,
+      "max": 449
+    },
+    "rounds": {
+      "mean": 65.94,
+      "p10": 50,
+      "median": 65.75,
+      "p90": 82.25,
+      "min": 35,
+      "max": 112.25
+    },
+    "commands": {
+      "mean": 565.71,
+      "p10": 429,
+      "median": 566,
+      "p90": 702,
+      "min": 306,
+      "max": 1004
+    },
+    "botCommands": {
+      "mean": 423.7,
+      "p10": 319,
+      "median": 423,
+      "p90": 528,
+      "min": 224,
+      "max": 747
+    },
+    "humanRolls": {
+      "mean": 79.5,
+      "p10": 61,
+      "median": 79,
+      "p90": 99,
+      "min": 40,
+      "max": 145
+    },
+    "humanCommands": {
+      "mean": 142.01,
+      "p10": 106,
+      "median": 142,
+      "p90": 181,
+      "min": 56,
+      "max": 257
+    },
+    "humanChoiceSelections": {
+      "mean": 32.19,
+      "p10": 17,
+      "median": 32,
+      "p90": 48,
+      "min": 2,
+      "max": 76
+    },
+    "humanForcedSelections": {
+      "mean": 30.32,
+      "p10": 18,
+      "median": 30,
+      "p90": 43,
+      "min": 3,
+      "max": 74
+    },
+    "humanNoMoveRolls": {
+      "mean": 16.99,
+      "p10": 5,
+      "median": 16,
+      "p90": 30,
+      "min": 0,
+      "max": 57
+    },
+    "sixes": {
+      "mean": 52.5,
+      "p10": 38,
+      "median": 52,
+      "p90": 67,
+      "min": 26,
+      "max": 97
+    },
+    "knockouts": {
+      "mean": 12.96,
+      "p10": 6,
+      "median": 13,
+      "p90": 20,
+      "min": 1,
+      "max": 36
+    },
+    "knockoutsByHuman": {
+      "mean": 3.31,
+      "p10": 1,
+      "median": 3,
+      "p90": 6,
+      "min": 0,
+      "max": 12
+    },
+    "humanPiecesBanished": {
+      "mean": 3.37,
+      "p10": 1,
+      "median": 3,
+      "p90": 6,
+      "min": 0,
+      "max": 12
+    },
+    "matchesWhereHumanNeverSummoned": 0,
+    "humanTurnOfFirstSummon": {
+      "mean": 6.01,
+      "p10": 1,
+      "median": 4,
+      "p90": 13,
+      "min": 1,
+      "max": 46
+    },
+    "roundOfFirstCompletionAnySeat": {
+      "mean": 16.23,
+      "p10": 10.5,
+      "median": 15.5,
+      "p90": 22.75,
+      "min": 5,
+      "max": 36.5
+    },
+    "humanPiecesCompletedAtEnd": {
+      "mean": 2.42,
+      "p10": 1,
+      "median": 2,
+      "p90": 4,
+      "min": 0,
+      "max": 4
+    }
+  },
+  "ratios": {
+    "humanRollsWithNoLegalMove": 0.2137,
+    "humanSelectionsWithRealChoice": 0.515,
+    "humanCommandShareOfAllCommands": 0.251
+  },
+  "humanCompletionRound": [
+    {
+      "piece": 1,
+      "matchesReached": 944,
+      "round": {
+        "mean": 27.99,
+        "p10": 13.25,
+        "median": 24.25,
+        "p90": 48.25,
+        "min": 6.25,
+        "max": 83.25
+      }
+    },
+    {
+      "piece": 2,
+      "matchesReached": 752,
+      "round": {
+        "mean": 44.28,
+        "p10": 28.25,
+        "median": 43.25,
+        "p90": 62.25,
+        "min": 18.25,
+        "max": 89.25
+      }
+    },
+    {
+      "piece": 3,
+      "matchesReached": 467,
+      "round": {
+        "mean": 56.46,
+        "p10": 39.25,
+        "median": 55.25,
+        "p90": 73.25,
+        "min": 27.25,
+        "max": 94.25
+      }
+    },
+    {
+      "piece": 4,
+      "matchesReached": 254,
+      "round": {
+        "mean": 65.47,
+        "p10": 49.25,
+        "median": 64.25,
+        "p90": 82.25,
+        "min": 35.25,
+        "max": 112.25
+      }
+    }
+  ],
+  "timing": {
+    "botDelaySeconds": 0.65,
+    "botWaitMinutes": {
+      "mean": 4.59,
+      "p10": 3.46,
+      "median": 4.58,
+      "p90": 5.72,
+      "min": 2.43,
+      "max": 8.09
+    },
+    "assumption": "Estimated minutes = bot commands x delay \u002B human commands x assumed seconds per human action; human seconds are NOT measured",
+    "estimatedMinutes": {
+      "1.5sPerHumanAction": {
+        "mean": 8.14,
+        "p10": 6.2,
+        "median": 8.14,
+        "p90": 10.15,
+        "min": 4.39,
+        "max": 14.52
+      },
+      "3.0sPerHumanAction": {
+        "mean": 11.69,
+        "p10": 8.86,
+        "median": 11.68,
+        "p90": 14.66,
+        "min": 6.07,
+        "max": 20.94
+      }
+    },
+    "estimatedMinutesBeforeHumanFirstSummon": {
+      "1.5sPerHumanAction": {
+        "mean": 0.49,
+        "p10": 0.05,
+        "median": 0.32,
+        "p90": 1.17,
+        "min": 0.05,
+        "max": 4.45
+      },
+      "3.0sPerHumanAction": {
+        "mean": 0.67,
+        "p10": 0.1,
+        "median": 0.46,
+        "p90": 1.51,
+        "min": 0.1,
+        "max": 5.72
+      }
+    }
+  },
+  "defaultUiSeed2026": {
+    "note": "Seed 2026 is the prototype default; real human choices diverge from this proxy after the first different selection",
+    "Winner": "P1",
+    "Rolls": 282,
+    "Turns": 234,
+    "HumanCommands": 135,
+    "BotCommands": 397,
+    "estimatedMinutes": {
+      "1.5sPerHumanAction": 7.68,
+      "3.0sPerHumanAction": 11.05
+    }
+  }
+}

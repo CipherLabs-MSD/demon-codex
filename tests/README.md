@@ -33,3 +33,7 @@ development-scenario replay tests and three Unity PlayMode tests. Run `dotnet te
 Add `-TestPlatform PlayMode` to the Unity helper for scene/controller validation.
 See [DC-0005 execution evidence and owner acceptance](../docs/product/DC_0005_EVIDENCE.md).
 DC-0004 and DC-0005 are DONE.
+DC-0006 adds a read-only pacing analysis of the prototype configuration (shipped
+session and bots, invariants on every transition). Run
+`dotnet run --project tools/DemonCodex.Pacing.Cli -c Release -- 1000 1 artifacts/pacing 10000`;
+[committed results](evidence/dc-0006/pacing-summary.json) feed the [M001 review](../docs/product/M001_REVIEW.md).

@@ -42,4 +42,4 @@ Unity 6000.6.3f1 EditMode validation passed all 48 tests. DC-0004 is human-appro
 DONE; mobile/IL2CPP builds remain unverified.
 
 `backend/`, `assets/` and `blockchain/` contain scope notes only. `content/` remains a
-proposed authoring contract. No production backend or deployment exists. See [DC-0005 play instructions and evidence](docs/product/DC_0005_EVIDENCE.md). DC-0006 remains BACKLOG.
+proposed authoring contract. No production backend or deployment exists. See [DC-0005 play instructions and evidence](docs/product/DC_0005_EVIDENCE.md). M001 is closed with the owner's ITERATE decision; see the [M001 review](docs/product/M001_REVIEW.md) (DC-0006).

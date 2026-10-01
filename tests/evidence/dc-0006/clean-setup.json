@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-01",
+  "task": "DC-0006 / KR4 clean setup",
+  "source": "fresh git clone of https://github.com/CipherLabs-MSD/demon-codex.git main",
+  "commit": "f9d30b0ce38a44dd48d6690bb094dcba877ad7b6",
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.10.6 (README asks 3.11+; CI uses 3.11)",
+    "dotnetSdk": "8.0.425, installed per README",
+    "unity": "6000.6.3f1 via tools/run_unity_tests.ps1",
+    "unityLibraryBeforeRun": "absent (full import from scratch)"
+  },
+  "steps": [
+    {
+      "command": "python tools/check_foundation.py",
+      "result": "PASS"
+    },
+    {
+      "command": "dotnet test tests/DemonCodex.Rules.Tests/... -c Release",
+      "result": "48 passed, 0 failed"
+    },
+    {
+      "command": "dotnet run --project tools/DemonCodex.Simulation.Cli -c Release -- 1000 1 artifacts/simulation 10000",
+      "result": "1000/1000 completed, 0 invariant failures, 0 watchdogs"
+    },
+    {
+      "command": "dotnet test tests/DemonCodex.LocalMatch.Tests/... -c Release",
+      "result": "14 passed, 0 failed"
+    },
+    {
+      "command": "diff tests/evidence/dc-0004/matches.csv artifacts/simulation/matches.csv",
+      "result": "identical",
+      "sha256": "7a106944df7fc8b6501b508beefddd8e8c5026366cb761ef658dd38c03baad9f"
+    },
+    {
+      "command": "tools/run_unity_tests.ps1 -TestPlatform EditMode",
+      "result": "62 passed, 0 failed",
+      "resultsSha256": "538f8c312ebb4226583f04ae3504c4324fcebcd6b33def5cc586c8fbad846c47"
+    },
+    {
+      "command": "tools/run_unity_tests.ps1 -TestPlatform PlayMode",
+      "result": "3 passed, 0 failed",
+      "resultsSha256": "20c5a149d7aaef6b8c7f2266456d324fc61d1e729fd1c856ae0ecea781793656"
+    }
+  ],
+  "frictions": [
+    "The .NET SDK 8.0.425 is not bundled; it must be installed first (README states this).",
+    "Unity batch tests require the project to be closed in any open Editor (Unity README states this).",
+    "After Unity runs, the clone is dirty: 20 untracked default ProjectSettings files appear and the tracked ProjectSettings.asset is rewritten with whitespace-only changes.",
+    "Python 3.10.6 ran the foundation check although README asks for 3.11+."
+  ],
+  "notCovered": [
+    "a different machine or new contributor",
+    "opening the Editor interactively from Unity Hub (the owner did this on the working copy)",
+    "iOS/Android, touch and IL2CPP builds"
+  ]
+}
