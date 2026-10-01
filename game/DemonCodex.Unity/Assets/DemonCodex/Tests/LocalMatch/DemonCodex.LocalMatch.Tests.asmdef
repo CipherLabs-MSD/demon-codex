@@ -1,0 +1,7 @@
+{
+  "name": "DemonCodex.LocalMatch.Tests",
+  "references": ["DemonCodex.Rules", "DemonCodex.LocalMatch"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

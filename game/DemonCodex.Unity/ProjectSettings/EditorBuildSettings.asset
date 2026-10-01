@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/DemonCodex/Scenes/LocalMatch.unity
+    guid: dc5ba801b93f3b14ca748a291e63cd5d
   m_configObjects: {}

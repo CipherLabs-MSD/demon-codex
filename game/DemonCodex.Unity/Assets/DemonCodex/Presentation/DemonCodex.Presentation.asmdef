@@ -1,0 +1,4 @@
+{
+  "name": "DemonCodex.Presentation",
+  "references": ["DemonCodex.Rules", "DemonCodex.LocalMatch"]
+}

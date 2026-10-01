@@ -17,6 +17,8 @@ jobs:
         run: dotnet test tests/DemonCodex.Rules.Tests/DemonCodex.Rules.Tests.csproj -c Release --logger "trx;LogFileName=rules.trx" --results-directory artifacts/dotnet-tests
       - name: 1000 matches with transition invariants
         run: dotnet run --project tools/DemonCodex.Simulation.Cli -c Release -- 1000 1 artifacts/simulation 10000
+      - name: Local match session and bot boundary tests
+        run: dotnet test tests/DemonCodex.LocalMatch.Tests/DemonCodex.LocalMatch.Tests.csproj -c Release --logger "trx;LogFileName=local-match.trx" --results-directory artifacts/dotnet-tests
       - name: Compare deterministic simulation with committed baseline
         run: diff tests/evidence/dc-0004/matches.csv artifacts/simulation/matches.csv
       - uses: actions/upload-artifact@v4
