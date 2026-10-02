@@ -68,9 +68,9 @@ How it bears on the evidence:
 - It confirms the owner's ratings: the faster pace (B) felt more fun.
 - It names placeholder presentation as one reason the game feels boring. Graphics
   are **identical in A and B**, so they cannot explain the A/B difference. They
-  can, however, depress absolute fun scores in both variants, so with placeholder
-  visuals the fun target (mean ≥ 4/5) is better read as A versus B than as an
-  absolute bar.
+  may lower fun scores in both variants. That is a limitation, not a change to
+  the target: the provisional fun target keeps its original definition, a mean of
+  at least 4 out of 5 on question 1.
 - It is general feedback, not a stated reason for either specific stop.
 
 ## What the results support
