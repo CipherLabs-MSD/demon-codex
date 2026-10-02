@@ -1,0 +1,92 @@
+{
+  "experiment": "M001.1",
+  "task": "DC-0037",
+  "compiled": "2026-10-02",
+  "status": "REVIEW / TEST — interim, not a decision",
+  "sessionsFound": 2,
+  "rawDataPolicy": "session files committed byte-for-byte as written by the Editor tooling; this summary is derived",
+  "integrityChecks": {
+    "schemaAndRequiredFields": "pass (both)",
+    "filenameMatchesStartVariantSeed": "pass (both)",
+    "humanPlusBotSecondsEqualsElapsed": "pass (both)",
+    "utcSpanMatchesElapsed": "pass (both)",
+    "actionsEqualRollsPlusSelections": "pass (both)",
+    "selectionsEqualRollsMinusNoMove": "pass (both)",
+    "allFiveAnswersSaved": "pass (both); optional notes empty in both",
+    "seed82DiceReplay": "pass: first 138 rolls give 23 sixes and 34 human rolls (A); first 52 give 8 sixes and 14 human rolls (B), matching the files; recorded turns are consistent with the stop points",
+    "variantDelayAppliedInPlay": "pass: 0.654 s per bot action in A, 0.251 s in B"
+  },
+  "sessions": [
+    {
+      "file": "sessions/20261002T132011Z-ControlA-seed82.json",
+      "sha256": "9ba492f5afc48fe6fb7508fb7e2fb2ec86b243d7789521ec610edaed79a2f45b",
+      "variant": "ControlA",
+      "tester": "owner",
+      "seed": 82,
+      "botDelaySeconds": 0.65,
+      "ending": "stopped by player at 244.1 s",
+      "elapsedSeconds": 244.141,
+      "roundsReached": 28.75,
+      "rolls": 138,
+      "botTurnSeconds": 116.468,
+      "botWaitingShare": 0.477,
+      "secondsPerBotAction": 0.654,
+      "humanTurnSeconds": 127.673,
+      "secondsPerHumanAction": 2.455,
+      "secondsPerRound": 8.49,
+      "meaningfulChoices": 5,
+      "forcedChoices": 13,
+      "equivalentSummonChoices": 2,
+      "meaningfulChoicesPerMinute": 1.229,
+      "longestSecondsWithoutMeaningfulChoice": 117.148,
+      "humanNoMoveRollShare": 0.471,
+      "answers": {
+        "fun": 2,
+        "matchLength": "too long",
+        "control": 2,
+        "waiting": 2,
+        "playAgain": "no",
+        "note": null
+      }
+    },
+    {
+      "file": "sessions/20261002T132457Z-VariantB-seed82.json",
+      "sha256": "35507d13d8d009e32e80ebcae5b03c1463a1a40bba4f656f3f53210b009f04ad",
+      "variant": "VariantB",
+      "tester": "owner",
+      "seed": 82,
+      "botDelaySeconds": 0.25,
+      "ending": "stopped by player at 30.4 s",
+      "elapsedSeconds": 30.392,
+      "roundsReached": 11.25,
+      "rolls": 52,
+      "botTurnSeconds": 14.282,
+      "botWaitingShare": 0.47,
+      "secondsPerBotAction": 0.251,
+      "humanTurnSeconds": 16.11,
+      "secondsPerHumanAction": 0.62,
+      "secondsPerRound": 2.7,
+      "meaningfulChoices": 2,
+      "forcedChoices": 10,
+      "equivalentSummonChoices": 1,
+      "meaningfulChoicesPerMinute": 3.948,
+      "longestSecondsWithoutMeaningfulChoice": 18.463,
+      "humanNoMoveRollShare": 0.143,
+      "answers": {
+        "fun": 4,
+        "matchLength": "good",
+        "control": 3,
+        "waiting": 1,
+        "playAgain": "maybe",
+        "note": null
+      }
+    }
+  ],
+  "missing": [
+    "No session reached natural victory, so full-match duration is still unmeasured for A and B.",
+    "Contract minimum is 3 sessions including the owner's A and B; 2 exist.",
+    "Target is 3 pairs including at least 2 non-builders; 0 non-builder sessions exist.",
+    "Stop reasons were not recorded (notes empty).",
+    "Variant B lasted 30.4 s; its answers describe a short fragment, not a match."
+  ]
+}
