@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DemonCodex.LocalMatch;
@@ -15,6 +16,54 @@ namespace DemonCodex.PlayTests
     public class LocalMatchPlayTests
     {
 #if UNITY_EDITOR
+        [UnityTest]
+        public IEnumerator PlaytestVariantsShareRulesAndOnlyBotPacingDiffers()
+        {
+            yield return SceneManager.LoadSceneAsync("LocalMatch");
+            var c = UnityEngine.Object.FindAnyObjectByType<LocalMatchController>();
+            Assert.That(c.BotDelaySeconds, Is.EqualTo(DemonCodex.Development.PlaytestExperiment.ControlBotDelaySeconds),
+                "Control A is the committed scene pacing.");
+            var variants = new[] { DemonCodex.Development.PlaytestVariant.ControlA, DemonCodex.Development.PlaytestVariant.VariantB };
+            var events = new List<string>[2];
+            var records = new DemonCodex.Development.PlaytestRecord[2];
+            for (int v = 0; v < 2; v++)
+            {
+                // Same launcher as Demon Codex > M001.1 Playtest; real Update-driven bots and real time.
+                var recorder = DemonCodex.Editor.PlaytestLauncher.Start(c, variants[v], 82, "test",
+                    () => Time.realtimeSinceStartupAsDouble, () => DateTimeOffset.UtcNow);
+                Assert.That(c.BotDelaySeconds, Is.EqualTo(DemonCodex.Development.PlaytestExperiment.BotDelaySeconds(variants[v])));
+                Assert.That(c.Session.Seed, Is.EqualTo(82u));
+                var log = new List<string>();
+                events[v] = log;
+                c.Session.Transitioned += t => log.Add(Invariants.EventFingerprint(t.Events));
+                int humanActions = 0;
+                float deadline = Time.realtimeSinceStartup + 60;
+                while (humanActions < 6 || !c.Session.IsHumanTurn)
+                {
+                    Assert.That(Time.realtimeSinceStartup, Is.LessThan(deadline), "Watchdog: bots did not hand the turn back.");
+                    if (humanActions < 6 && c.Session.IsHumanTurn)
+                    {
+                        var s = c.Session;
+                        Assert.That(s.State.Phase == MatchPhase.AwaitingRoll ? c.Roll() : c.Select(BotPolicy.Choose(s.State, s.LegalMoves)), Is.True);
+                        humanActions++;
+                    }
+                    yield return null;
+                }
+                recorder.Abort("test complete");
+                DemonCodex.Editor.PlaytestLauncher.RestoreControlPacing(c);
+                Assert.That(c.BotDelaySeconds, Is.EqualTo(DemonCodex.Development.PlaytestExperiment.ControlBotDelaySeconds));
+                records[v] = recorder.Record;
+                Assert.That(records[v].humanActions, Is.EqualTo(6));
+                Assert.That(records[v].botActions, Is.GreaterThan(3));
+            }
+            Assert.That(events[1], Is.EqualTo(events[0]), "Same seed and choices: identical domain events in A and B.");
+            Assert.That(records[1].botActions, Is.EqualTo(records[0].botActions));
+            double perBotA = records[0].botTurnSeconds / records[0].botActions, perBotB = records[1].botTurnSeconds / records[1].botActions;
+            TestContext.WriteLine($"Seconds per bot command: A {perBotA:0.000}, B {perBotB:0.000} over {records[0].botActions} commands");
+            Assert.That(perBotA, Is.InRange(0.6, 0.85), "Control A waits about 0.65 s per bot command.");
+            Assert.That(perBotB, Is.InRange(0.22, 0.45), "Variant B waits about 0.25 s per bot command.");
+        }
+
         [UnityTest]
         public IEnumerator DevelopmentScenariosUseNormalSelectionAndRestartRestoresNormalPlay()
         {
