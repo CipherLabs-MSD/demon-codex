@@ -19,7 +19,9 @@ and separate design policies do not block this approval. DC-0004 is DONE after e
 validation (48 passed, 0 failed). DC-0005 is DONE after owner acceptance on 2026-10-01 (endgame checks A–E PASS)
 and executed automated evidence. DC-0006 is DONE: the product owner recorded ITERATE on 2026-10-01 and M001 is closed
 ([M001 review](M001_REVIEW.md)). DC-0036 is a PROPOSAL row, BACKLOG and not started. DC-0037 (M001.1) is REVIEW / TEST: the experiment
-contract and Editor-only A/B tooling are ready; three owner sessions are recorded (one full match); the exit gate is not met.
+contract and tooling delivered three owner sessions (one full match). DC-0037 is DONE as a limited experiment with
+accepted deviations: owner decision ITERATE (2026-10-03), next lever visual identity and game feel. The DC-0007 plan
+is pending owner review; DC-0007 itself is not started.
 The product owner explicitly
 resolved DC-0003 independently through ADR 0002; its prior foundation-review
 dependency is waived for that decision only. Other foundation outputs do not imply approval.
@@ -62,4 +64,4 @@ dependency is waived for that decision only. Other foundation outputs do not imp
 | DC-0034 | Blockchain Later | Assess exceptional provenance need | Blockchain Later lead (unassigned) | P3 | DC-0033, DC-0030 | Compare signed certificates and optional chain; ordinary play independent | Human go/defer ADR; no deployment | BACKLOG | Later |
 | DC-0035 | Content Scale-up | Define staged catalog quality gates | Content Scale-up lead (unassigned) | P2 | DC-0008, DC-0009 | Set review process toward 66 then 666 without generating roster | Content approval and rights checklist | BACKLOG | Later |
 | DC-0036 | Lexicon | Create Demon Codex Lexicon & Naming Bible (PROPOSAL) | Lore lead (unassigned) | P1 | DC-0006 | Controlled, labeled vocabulary for demon, player, board, match, collection and system terms; naming rules only, no roster or restricted lore | Owner-reviewed lexicon proposal | BACKLOG | Later |
-| DC-0037 | Core Game | Run pacing and fun playtest | Product owner (decision); Core Game lead (unassigned) | P0 | DC-0006 | Experiment contract; Editor-only CONTROL A (0.65 s bots) vs VARIANT B (0.25 s bots) with rules unchanged; 3+ recorded human sessions incl. owner A and B (target 2+ non-builders); owner picks next lever | [Experiment contract](M001_1_PACING_FUN_EXPERIMENT.md); [interim evidence](DC_0037_EVIDENCE.md): 3 owner sessions (1 full B match, 2 stopped); no full A match, no non-builders, owner decision pending | REVIEW / TEST | M001.1 |
+| DC-0037 | Core Game | Run pacing and fun playtest | Product owner (decision); Core Game lead (unassigned) | P0 | DC-0006 | Experiment contract; Editor-only CONTROL A (0.65 s bots) vs VARIANT B (0.25 s bots) with rules unchanged; 3+ recorded human sessions incl. owner A and B (target 2+ non-builders); owner picks next lever | [Experiment contract](M001_1_PACING_FUN_EXPERIMENT.md); [evidence and decision](DC_0037_EVIDENCE.md): 3 owner sessions (1 full B match, 2 stopped); owner decision ITERATE 2026-10-03 with accepted deviations (no full A match, no non-builders) | DONE | M001.1 |

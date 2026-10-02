@@ -29,10 +29,10 @@ product owner records whether to iterate or proceed. No dates or budget promised
 
 ## M001.1 — Pacing and fun playtest
 WORKING DECISION: started 2026-10-01 at the owner's request after the ITERATE
-decision. Status: REVIEW / TEST — the [experiment contract](M001_1_PACING_FUN_EXPERIMENT.md)
-and Editor-only A/B tooling are ready; three owner sessions are recorded as
-[interim evidence](DC_0037_EVIDENCE.md), one of them a full VARIANT B match
-([DC-0037](MASTER_BACKLOG.md)). CONTROL A is the unchanged M001 game; VARIANT B
+decision. Status: **closed 2026-10-03** as a limited experiment with accepted
+deviations; owner decision **ITERATE** ([evidence and decision](DC_0037_EVIDENCE.md),
+[DC-0037](MASTER_BACKLOG.md)). Next lever: visual identity and game feel, with
+0.25 s bot pacing as the candidate; the plan is pending owner review. CONTROL A is the unchanged M001 game; VARIANT B
 changes only the bot presentation delay (0.65 s → 0.25 s). It asks whether the core
 match is enjoyable at its length, and if not why, before any scope expands.
 Targets are provisional and need owner approval.

@@ -1,8 +1,8 @@
 {
   "experiment": "M001.1",
   "task": "DC-0037",
-  "compiled": "2026-10-02",
-  "status": "REVIEW / TEST — interim, not a decision",
+  "compiled": "2026-10-02 (sessions); decision recorded 2026-10-03",
+  "status": "DONE — limited experiment closed 2026-10-03 with accepted deviations",
   "sessionsFound": 3,
   "fullMatches": 1,
   "stoppedSessions": 2,
@@ -128,11 +128,31 @@
       }
     }
   ],
-  "missing": [
+  "ownerDecision": {
+    "decision": "ITERATE",
+    "date": "2026-10-03",
+    "nextLever": "visual identity and game feel",
+    "candidatePacing": "VARIANT B 0.25 s bot delay (candidate only)",
+    "acceptedDeviations": [
+      "Only three sessions, all by the owner (target: three pairs incl. at least two non-builders)",
+      "No complete CONTROL A match",
+      "Asymmetric A/B comparison (full B match vs stopped sessions)",
+      "No external testers"
+    ],
+    "notClaimed": [
+      "validated fun or replayability",
+      "a conclusive A/B result",
+      "that presentation explains all low enjoyment",
+      "that meaningful decisions need no further work"
+    ]
+  },
+  "openQuestions": [
     "No full CONTROL A match: A's full-match duration is unmeasured, so a full-match A/B comparison is not possible yet.",
     "Only one full match exists (VARIANT B), from one tester who built the game.",
     "Target is 3 pairs including at least 2 non-builders; 0 non-builder sessions exist.",
     "Per-session stop reasons for the two stopped sessions were not stated (notes empty).",
-    "The owner's decision on the next lever has not been recorded."
+    "The owner's decision on the next lever has not been recorded.",
+    "How much low enjoyment comes from placeholder presentation versus decision quality or tension?",
+    "Are the frequent meaningful choices deliberate (0.42 s per human action)?"
   ]
 }

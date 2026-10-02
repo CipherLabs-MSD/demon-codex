@@ -1,7 +1,60 @@
 # DC-0037 — M001.1 interim playtest evidence
 
-Status: **REVIEW / TEST — interim evidence, not a decision.** Updated 2026-10-02
+Status: **DONE — closed 2026-10-03 as a limited experiment with accepted
+deviations.** Owner decision: **ITERATE**. Session evidence compiled 2026-10-02
 from the raw session files. Contract: [M001.1 Pacing & Fun Experiment](M001_1_PACING_FUN_EXPERIMENT.md).
+
+## Owner decision — ITERATE (2026-10-03)
+
+The product owner recorded **ITERATE** on 2026-10-03 and closed DC-0037 as a
+**limited experiment with accepted deviations**.
+
+Owner feedback, as given:
+
+> The visual presentation is important to my enjoyment. The current prototype has
+> no appealing visual presentation yet. Faster pacing felt more enjoyable. I want
+> the next iteration to establish enough visual identity and game feel to evaluate
+> that part of Demon Codex.
+
+Next lever chosen by the owner: **visual identity and game feel**. VARIANT B's
+0.25 s bot pacing is the *candidate* pacing for the next prototype. CONTROL A,
+both variant definitions, the raw sessions and the provisional targets stay
+exactly as recorded.
+
+### Accepted deviations (not fulfilled requirements)
+
+The owner explicitly accepted these gaps. They are **deviations**, not met
+requirements:
+
+| Deviation | What the contract wanted |
+| --- | --- |
+| Only three sessions, all by the owner | Target of three pairs including at least two non-builders |
+| No complete CONTROL A match | A full-match measurement for each variant |
+| A/B comparison is asymmetric: a full B match against stopped sessions | A like-for-like comparison of complete matches |
+| No external testers | Non-builder sessions to reduce the builder's own bias |
+
+### Not claimed
+
+This experiment does **not** show:
+- validated fun or replayability (full-match fun was 3 / 5, below the target);
+- a conclusive A/B result;
+- that presentation explains all of the low enjoyment;
+- that meaningful decisions need no further work.
+
+### Open product questions carried forward
+
+1. How much of the low enjoyment comes from placeholder presentation, and how
+   much from decision quality, tension or risk/reward?
+2. Are the frequent "meaningful" choices actually deliberate? The owner spent
+   0.42 s per action in the full match.
+3. How long, and how enjoyable, is a complete CONTROL A match?
+4. How do players who did not build the game respond?
+5. Does replay desire hold beyond "maybe"?
+6. Why were the two stopped sessions stopped?
+7. Bots still took 63% of the full match at 0.25 s pacing. Is that waiting felt?
+8. [Differentiation](M001_1_PACING_FUN_EXPERIMENT.md#differentiation-question):
+   what makes Demon Codex intrinsically different from Ludo/Fia once theme,
+   collection and economy are removed?
 
 ## Sessions recorded
 
@@ -139,21 +192,24 @@ definition: a mean of at least 4 out of 5 on question 1.
 | Exit gate item | Status |
 | --- | --- |
 | At least 3 human sessions including the owner's A and B | **Met** (3 sessions) |
-| Measured durations | Partly met: one full match (B); A only partial |
+| Measured durations | Met for every session; a full-match duration exists only for B. **Accepted deviation:** no complete CONTROL A match |
 | Bot waiting share measured | Met for all sessions, including the B full match |
 | Every session ends in victory or a recorded stop | Met; reasons for the two stops not stated |
 | All ratings recorded | Met (5 of 5 answers in all 3 sessions) |
-| A/B comparison | Partly met: B full match against A stopped session only |
+| A/B comparison | **Accepted deviation:** asymmetric (full B match against stopped sessions) |
 | No rules regression; deterministic play unchanged | Met (no rule code changed; CI green) |
 | Committed session files and A/B summary | Met (this document and summary.json) |
-| Non-builder sessions, or explicit owner acceptance of the reduced sample | **Not met** |
-| Owner review choosing the next lever | **Not met** |
+| Non-builder sessions, or explicit owner acceptance of the reduced sample | **Accepted deviation:** owner explicitly accepted the reduced sample (2026-10-03) |
+| Owner review choosing the next lever | Met: ITERATE; next lever visual identity and game feel (2026-10-03) |
 
-**The exit gate is not met.** DC-0037 stays REVIEW / TEST.
+On 2026-10-02 the exit gate was not met. With the owner's decision and explicit
+acceptance of the deviations above (2026-10-03), DC-0037 is closed as **DONE — a
+limited experiment**. The deviations remain open evidence gaps, not completed work.
 
 Read through the contract's decision rules, the full B match fits the row "length
 feels good but fun or control is low (≤ 3)", with fun at 3. That row points toward
 meaningful choices, tension and risk/reward rather than duration. The waiting
 rating did not improve over A (3 against 2), so the row "B clearly improves
 pacing and waiting ratings improve" is not fully met. The contract's small-sample
-rule also applies, so this is a reading of the evidence, not a decision.
+rule also applies, so this was a reading of the evidence, not a decision. The
+owner's decision is recorded above.
