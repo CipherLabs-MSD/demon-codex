@@ -3,23 +3,32 @@
   "task": "DC-0037",
   "compiled": "2026-10-02",
   "status": "REVIEW / TEST — interim, not a decision",
-  "sessionsFound": 2,
+  "sessionsFound": 3,
+  "fullMatches": 1,
+  "stoppedSessions": 2,
   "rawDataPolicy": "session files committed byte-for-byte as written by the Editor tooling; this summary is derived",
   "integrityChecks": {
-    "schemaAndRequiredFields": "pass (both)",
-    "filenameMatchesStartVariantSeed": "pass (both)",
-    "humanPlusBotSecondsEqualsElapsed": "pass (both)",
-    "utcSpanMatchesElapsed": "pass (both)",
-    "actionsEqualRollsPlusSelections": "pass (both)",
-    "selectionsEqualRollsMinusNoMove": "pass (both)",
-    "allFiveAnswersSaved": "pass (both); optional notes empty in both",
-    "seed82DiceReplay": "pass: first 138 rolls give 23 sixes and 34 human rolls (A); first 52 give 8 sixes and 14 human rolls (B), matching the files; recorded turns are consistent with the stop points",
-    "variantDelayAppliedInPlay": "pass: 0.654 s per bot action in A, 0.251 s in B"
+    "schemaAndRequiredFields": "pass (all 3)",
+    "filenameMatchesStartVariantSeed": "pass (all 3)",
+    "humanPlusBotSecondsEqualsElapsed": "pass (all 3)",
+    "utcSpanMatchesElapsed": "pass (all 3)",
+    "actionsEqualRollsPlusSelections": "pass (all 3)",
+    "selectionsEqualRollsMinusNoMove": "pass (all 3)",
+    "allFiveAnswersSaved": "pass (all 3); optional notes empty in all 3",
+    "seed82DiceReplay": "pass: A first 138 rolls 23 sixes/34 human; B stopped first 52 rolls 8 sixes/14 human; B full first 297 rolls 45 sixes/76 human/252 turns, final roll 1 by P3 (the recorded winner)",
+    "variantDelayAppliedInPlay": "pass: 0.654 s per bot action in A, 0.251 s and 0.250 s in the B sessions"
+  },
+  "provisionalFunTarget": {
+    "definition": "mean >= 4 out of 5 on question 1 (contract definition, unchanged)",
+    "fullMatchesOnly": 3.0,
+    "allSessions": 3.0,
+    "met": false
   },
   "sessions": [
     {
       "file": "sessions/20261002T132011Z-ControlA-seed82.json",
       "sha256": "9ba492f5afc48fe6fb7508fb7e2fb2ec86b243d7789521ec610edaed79a2f45b",
+      "type": "stopped session",
       "variant": "ControlA",
       "tester": "owner",
       "seed": 82,
@@ -40,6 +49,7 @@
       "meaningfulChoicesPerMinute": 1.229,
       "longestSecondsWithoutMeaningfulChoice": 117.148,
       "humanNoMoveRollShare": 0.471,
+      "humanCompletedPieces": 1,
       "answers": {
         "fun": 2,
         "matchLength": "too long",
@@ -52,6 +62,7 @@
     {
       "file": "sessions/20261002T132457Z-VariantB-seed82.json",
       "sha256": "35507d13d8d009e32e80ebcae5b03c1463a1a40bba4f656f3f53210b009f04ad",
+      "type": "stopped session",
       "variant": "VariantB",
       "tester": "owner",
       "seed": 82,
@@ -72,6 +83,7 @@
       "meaningfulChoicesPerMinute": 3.948,
       "longestSecondsWithoutMeaningfulChoice": 18.463,
       "humanNoMoveRollShare": 0.143,
+      "humanCompletedPieces": 0,
       "answers": {
         "fun": 4,
         "matchLength": "good",
@@ -80,13 +92,47 @@
         "playAgain": "maybe",
         "note": null
       }
+    },
+    {
+      "file": "sessions/20261002T214300Z-VariantB-seed82.json",
+      "sha256": "dd0f4b0ad1a21374ae04092172cb3f5f56fbc7459152066495b4d3ed84d184f3",
+      "type": "full match",
+      "variant": "VariantB",
+      "tester": "owner",
+      "seed": 82,
+      "botDelaySeconds": 0.25,
+      "ending": "natural victory, winner P3",
+      "elapsedSeconds": 150.122,
+      "roundsReached": 63,
+      "rolls": 297,
+      "botTurnSeconds": 94.54,
+      "botWaitingShare": 0.63,
+      "secondsPerBotAction": 0.25,
+      "humanTurnSeconds": 55.582,
+      "secondsPerHumanAction": 0.421,
+      "secondsPerRound": 2.38,
+      "meaningfulChoices": 39,
+      "forcedChoices": 17,
+      "equivalentSummonChoices": 2,
+      "meaningfulChoicesPerMinute": 15.587,
+      "longestSecondsWithoutMeaningfulChoice": 40.026,
+      "humanNoMoveRollShare": 0.263,
+      "humanCompletedPieces": 3,
+      "answers": {
+        "fun": 3,
+        "matchLength": "good",
+        "control": 4,
+        "waiting": 3,
+        "playAgain": "maybe",
+        "note": null
+      }
     }
   ],
   "missing": [
-    "No session reached natural victory, so full-match duration is still unmeasured for A and B.",
-    "Contract minimum is 3 sessions including the owner's A and B; 2 exist.",
+    "No full CONTROL A match: A's full-match duration is unmeasured, so a full-match A/B comparison is not possible yet.",
+    "Only one full match exists (VARIANT B), from one tester who built the game.",
     "Target is 3 pairs including at least 2 non-builders; 0 non-builder sessions exist.",
-    "Stop reasons were not recorded (notes empty).",
-    "Variant B lasted 30.4 s; its answers describe a short fragment, not a match."
+    "Per-session stop reasons for the two stopped sessions were not stated (notes empty).",
+    "The owner's decision on the next lever has not been recorded."
   ]
 }

@@ -2,9 +2,9 @@
 
 Task: [DC-0037](MASTER_BACKLOG.md). Follows the [M001 review](M001_REVIEW.md)
 (owner decision ITERATE, 2026-10-01). Started at the owner's request on 2026-10-01.
-Status: **REVIEW / TEST** — experiment contract and Editor tooling are ready. Two
-owner sessions (A and B, seed 82, both stopped early) are recorded as
-[interim evidence](DC_0037_EVIDENCE.md); more sessions are required.
+Status: **REVIEW / TEST** — experiment contract and Editor tooling are ready. Three
+owner sessions on seed 82 are recorded as [interim evidence](DC_0037_EVIDENCE.md):
+one full VARIANT B match and two stopped sessions (A and B). The exit gate is not met.
 
 Labels: the design below is a WORKING DECISION. Every target is a **PROVISIONAL
 PRODUCT TARGET** that needs owner approval; none is a permanent requirement.
