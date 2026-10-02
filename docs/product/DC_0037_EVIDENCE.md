@@ -52,6 +52,27 @@ All checks pass for both files:
 | Q5 play again immediately | No | Maybe |
 | Note | none | none |
 
+## Owner feedback after the A/B sessions
+
+Given by the product owner on 2026-10-02, verbatim:
+
+> Spelet är fortfarande en tidig prototyp. Avsaknaden av utvecklad grafik och
+> intressant visuell presentation bidrar till att det känns tråkigt, vilket är
+> förståeligt i detta stadium. Det snabbare tempot kändes roligare. Kommentstadium.
+
+Translation: "The game is still an early prototype. The lack of developed graphics
+and interesting visual presentation contributes to it feeling boring, which is
+understandable at this stage. The faster pace felt more fun."
+
+How it bears on the evidence:
+- It confirms the owner's ratings: the faster pace (B) felt more fun.
+- It names placeholder presentation as one reason the game feels boring. Graphics
+  are **identical in A and B**, so they cannot explain the A/B difference. They
+  can, however, depress absolute fun scores in both variants, so with placeholder
+  visuals the fun target (mean ≥ 4/5) is better read as A versus B than as an
+  absolute bar.
+- It is general feedback, not a stated reason for either specific stop.
+
 ## What the results support
 
 - The tooling records complete, internally consistent sessions in real use, and
@@ -62,7 +83,8 @@ All checks pass for both files:
 - In that A segment, real decisions were sparse: 5 meaningful choices in 4 minutes
   (one per 49 s, against a provisional target of one every 20–30 s), a 117 s
   stretch with none, and nearly half of the human rolls with no legal move.
-- In the owner's ratings, the short B session felt better on all five questions.
+- In the owner's ratings and later comment, the faster pace felt more fun; the short
+  B session scored better on all five questions.
 
 ## What remains uncertain
 
@@ -78,7 +100,11 @@ All checks pass for both files:
 - **The pacing driver is unclear.** In A the owner rated waiting low (2) while
   fun and control were also low, which hints that sparse decisions may matter as
   much as bot speed. That is a hypothesis, not a finding.
-- **Why the owner stopped is unknown**; both notes are empty.
+- **Why each session was stopped is not stated**; both notes are empty. The owner's
+  later comment (placeholder presentation feels boring) is general feedback.
+- **Presentation is a separate open factor.** Placeholder visuals may lower fun in
+  both variants, so absolute fun scores now mix pacing with presentation; game feel
+  belongs to [DC-0007](MASTER_BACKLOG.md), not this experiment.
 - **Generality:** one tester, who built the game, and one session per variant.
 - The recorder stores totals only, so it cannot show *when* in A the 117 s gap or
   the no-move streak happened.
@@ -95,7 +121,7 @@ All checks pass for both files:
 | At least 3 sessions including the owner's A and B | 2 of 3 |
 | Target: 3 pairs including at least 2 non-builders | 1 owner pair; 0 non-builder sessions |
 | Full-match duration measured | Missing: no natural victory yet |
-| Every session ends in victory or a recorded stop reason | Stops recorded; **reasons missing** (notes empty) |
+| Every session ends in victory or a recorded stop reason | Stops recorded; per-session reasons not stated (general owner feedback recorded) |
 | All five answers per session | Complete in both sessions |
 | A/B comparison | Interim only (table above) |
 | Owner decision on the next lever | Not yet |
